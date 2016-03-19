@@ -4,13 +4,12 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>马占臣</title>
+    <title>GData的使用 配置arc和mrc混编 | 马占臣</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="马占臣">
     
-    <meta name="description" content="title: 我的第一篇博客date: 2015-02-15 20:04:45categories:tags: [Others]
-我的第一篇博客  大家好，我是一只程序猿，这是我的blogblog的地址就是我名字的全拼 http://www.mazhanchen.com 欢迎大家常来。">
+    <meta name="description" content="虽然现在网络请求数据多数都是JSon数据，但是偶尔也有XML的数据，XML的解析可没有JSon那么轻松，抛开复杂的SAX解析，使用相对简单的DOM解析也不错。  DOM解析比较好的一种实现方式是Google提供的GData，我们想使用这个方法需要导入类库，而且如果我们编程用的是arc的话，还会和GD">
     
     
     
@@ -66,15 +65,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2016/03/20/myFirstBlog/" title="" itemprop="url"></a>
+      <a href="/2015/03/18/GData  配置arc和mrc混编/" title="GData的使用 配置arc和mrc混编" itemprop="url">GData的使用 配置arc和mrc混编</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="马占臣">马占臣</a>
     </p>
   <p class="article-time">
-    <time datetime="2016-03-19T17:13:25.000Z" itemprop="datePublished">2016-03-20</time>
-    更新日期:<time datetime="2016-03-19T17:13:25.000Z" itemprop="dateModified">2016-03-20</time>
+    <time datetime="2015-03-18T10:30:22.000Z" itemprop="datePublished">2015-03-18</time>
+    更新日期:<time datetime="2016-03-19T17:22:24.000Z" itemprop="dateModified">2016-03-20</time>
     
   </p>
 </header>
@@ -83,21 +82,30 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u6211_u7684_u7B2C_u4E00_u7BC7_u535A_u5BA2"><span class="toc-number">1.</span> <span class="toc-text">我的第一篇博客</span></a></li></ol>
+		
 		</div>
 		
-		<p>title: 我的第一篇博客<br>date: 2015-02-15 20:04:45<br>categories:<br>tags: [Others]</p>
-<h2 id="u6211_u7684_u7B2C_u4E00_u7BC7_u535A_u5BA2"><a href="#u6211_u7684_u7B2C_u4E00_u7BC7_u535A_u5BA2" class="headerlink" title="我的第一篇博客"></a>我的第一篇博客</h2><p><strong>  大家好，我是一只程序猿，这是我的blog<br>blog的地址就是我名字的全拼 <a href="http://www.mazhanchen.com" target="_blank" rel="external">http://www.mazhanchen.com</a> 欢迎大家常来。  </strong></p>
+		<p><strong> 虽然现在网络请求数据多数都是JSon数据，但是偶尔也有XML的数据，XML的解析可没有JSon那么轻松，抛开复杂的SAX解析，使用相对简单的DOM解析也不错。<br>  DOM解析比较好的一种实现方式是Google提供的GData，我们想使用这个方法需要导入类库，而且如果我们编程用的是arc的话，还会和GData发生冲突，因为GData是用mrc写的，因此我们还需要配置一下，实现arc和mrc的混编。 </strong> </p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/数据解析/">数据解析</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/OC/">OC</a>
+</div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2016/03/20/myFirstBlog/" data-title="马占臣" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2015/03/18/GData  配置arc和mrc混编/" data-title="GData的使用 配置arc和mrc混编 | 马占臣" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -107,18 +115,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2016/03/20/GData  配置arc和mrc混编/" title="">
+ <a href="/2015/03/22/Objective-C-KVC和KVO的使用/" title="Objective-C KVC和KVO的使用">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  (no title)</span>
+  Objective-C KVC和KVO的使用</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/03/22/Objective-C-KVC和KVO的使用/"  title="Objective-C KVC和KVO的使用">
+<a href="/2015/02/15/myFirstBlog/"  title="我的第一篇博客">
  <strong>NEXT:</strong><br/> 
- <span>Objective-C KVC和KVO的使用
+ <span>我的第一篇博客
 </span>
 </a>
 </div>
@@ -135,7 +143,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#u6211_u7684_u7B2C_u4E00_u7BC7_u535A_u5BA2"><span class="toc-number">1.</span> <span class="toc-text">我的第一篇博客</span></a></li></ol>
+  
   </div>
 
 <div id="asidepart">
@@ -147,7 +155,7 @@
 	<p class="asidetitle">分類</p>
 		<ul>
 		
-			<li><a href="/categories/OC/" title="OC">OC<sup>1</sup></a></li>
+			<li><a href="/categories/OC/" title="OC">OC<sup>2</sup></a></li>
 		
 		</ul>
 </div>
@@ -163,6 +171,10 @@
 			<li><a href="/tags/KVO/" title="KVO">KVO<sup>0</sup></a></li>
 		
 			<li><a href="/tags/OC/" title="OC">OC<sup>1</sup></a></li>
+		
+			<li><a href="/tags/Others/" title="Others">Others<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据解析/" title="数据解析">数据解析<sup>1</sup></a></li>
 		
 		</ul>
 </div>

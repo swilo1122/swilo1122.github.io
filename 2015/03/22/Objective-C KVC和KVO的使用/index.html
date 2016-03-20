@@ -66,7 +66,7 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/03/22/Objective-C-KVC和KVO的使用/" title="Objective-C KVC和KVO的使用" itemprop="url">Objective-C KVC和KVO的使用</a>
+      <a href="/2015/03/22/Objective-C KVC和KVO的使用/" title="Objective-C KVC和KVO的使用" itemprop="url">Objective-C KVC和KVO的使用</a>
   </h1>
   <p class="article-author">By
     
@@ -74,7 +74,7 @@
     </p>
   <p class="article-time">
     <time datetime="2015-03-22T05:18:09.000Z" itemprop="datePublished">2015-03-22</time>
-    更新日期:<time datetime="2016-03-19T17:54:33.000Z" itemprop="dateModified">2016-03-20</time>
+    更新日期:<time datetime="2016-03-20T12:55:25.000Z" itemprop="dateModified">2016-03-20</time>
     
   </p>
 </header>
@@ -97,7 +97,8 @@
 <p>然后在ViewController中使用KVO，代码如下：</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"ViewController.h"</span></span></span><br><span class="line"><span class="preprocessor">#import <span class="title">"Person.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></span><br><span class="line">&#123;</span><br><span class="line">    Person *person;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line"></span><br><span class="line">    person = [[Person alloc] initWithName:<span class="string">@"John"</span>];</span><br><span class="line">    <span class="comment">//为person对象的属性name添加观察者为ViewController</span></span><br><span class="line">    [person addObserver:<span class="keyword">self</span> forKeyPath:<span class="string">@"name"</span> options:<span class="built_in">NSKeyValueObservingOptionNew</span> context:<span class="literal">nil</span>];</span><br><span class="line">    <span class="comment">//可以通过下面两种方式改变name的值，都会触发回调方法</span></span><br><span class="line">    person<span class="variable">.name</span> = <span class="string">@"SmithJackyson"</span>;</span><br><span class="line">    [person setValue:<span class="string">@"SmithJackyson"</span> forKey:<span class="string">@"name"</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//实现KVO回调方法，只要person的属性name发生变化，就会回调这个方法</span></span><br><span class="line">- (<span class="keyword">void</span>)observeValueForKeyPath:(<span class="built_in">NSString</span> *)keyPath ofObject:(<span class="keyword">id</span>)object change:(<span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *,<span class="keyword">id</span>&gt; *)change context:(<span class="keyword">void</span> *)context</span><br><span class="line">&#123;</span><br><span class="line">　　 <span class="comment">//change字典里存的内容是根据你注册时的选项option决定的，如果为NSKeyValueObservingOptionNew，则字典里存的是改变后的值，key为new，同样NSKeyValueObservingOptionOld，则字典里存的是改变前的值，key为old，如果两者都有，则字典存储着两个值</span></span><br><span class="line">    <span class="keyword">if</span> ([keyPath isEqualToString:<span class="string">@"name"</span>] &amp;&amp; object == person) &#123;</span><br><span class="line">        <span class="built_in">NSLog</span>(<span class="string">@"now name = %@"</span>,person<span class="variable">.name</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)didReceiveMemoryWarning &#123;</span><br><span class="line">    [<span class="keyword">super</span> didReceiveMemoryWarning];</span><br><span class="line">    <span class="comment">// Dispose of any resources that can be recreated.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 <p>运行结果如下：<br>2015-03-22 13:10:09.102 test[1752:94898] now name = SmithJackyson<br>2015-03-22 13:10:09.102 test[1752:94898] now name = SmithJackyson<br>最后还需要移除观察者</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="typename">void</span>)dealloc</span><br><span class="line">&#123;</span><br><span class="line">    [person <span class="string">removeObserver:</span>self <span class="string">forKeyPath:</span>@<span class="string">"name"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>  
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="typename">void</span>)dealloc</span><br><span class="line">&#123;</span><br><span class="line">    [person <span class="string">removeObserver:</span>self <span class="string">forKeyPath:</span>@<span class="string">"name"</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  
 	</div>
 		<footer class="article-footer clearfix">
 
@@ -116,7 +117,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2015/03/22/Objective-C-KVC和KVO的使用/" data-title="Objective-C KVC和KVO的使用 | 马占臣" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2015/03/22/Objective-C KVC和KVO的使用/" data-title="Objective-C KVC和KVO的使用 | 马占臣" data-tsina="null" class="share clearfix">
   </div>
 
 </div>

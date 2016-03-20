@@ -26,11 +26,11 @@
     <link rel="alternative" href="/atom.xml" title="马占臣" type="application/atom+xml">
     
     
-    <link rel="icon" href="/img/favicon.ico">
+    <link rel="icon" href="/img/favicon">
     
     
-    <link rel="apple-touch-icon" href="/img/jacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon" href="/img/jacman">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
@@ -92,13 +92,6 @@
   </p>
 </header>
 	<div class="article-content">
-		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
-		
-			
-		
-		</div>
 		
 		<p>我们在使用UIView的时候，如果想访问其x、y、width、height等属性很麻烦，需要点出来view.frame.size.width,因此还是自己写一个category来让自己更舒服一点！（其实就是懒！）<br>首先cmd+n新建文件，选择Objective-C File，然后名字随便起啦，让自己和同事一看就知道是什么类型的category就好，file type选择category，class当然就选择UIView了。至于文件位置则看大家喜好，创建完可以拿出来以后留着用，等多学一些知识可以将他们一起封装成一个静态库，那样使用就更加方便了。<br>文件创建好之后，该写属性了，但是有一点提示：</p>
 <blockquote>
@@ -170,6 +163,13 @@
 <aside class="clearfix">
 
   
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="swilo1122" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
 
 
   
@@ -195,11 +195,13 @@
 			
 		
 			
-				<li><a href="/tags/OC/" title="OC">OC<sup>1</sup></a></li>
+				<li><a href="/tags/数据解析/" title="数据解析">数据解析<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/数据解析/" title="数据解析">数据解析<sup>1</sup></a></li>
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+			
+		
 			
 		
 			
@@ -260,8 +262,10 @@
 	 
 	<div class="social-font" class="clearfix">
 		
-		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		<a href="http://weibo.com/mazhanchen" target="_blank" class="icon-weibo" title="微博"></a>
 		
+		
+		<a href="https://github.com/swilo1122" target="_blank" class="icon-github" title="github"></a>
 		
 		
 		
@@ -319,6 +323,11 @@ $(document).ready(function(){
   $(window).scroll(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
   
   $(window).resize(function(){
     getSize(); 

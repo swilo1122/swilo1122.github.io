@@ -19,7 +19,7 @@
 <meta property="og:site_name" content="马占臣">
 <meta property="og:description" content="KVC的使用通常情况下，我们都是通过属性或者定义存取方法来对实例变量进行存取，但是除此之外，我们也可以通过Key-Value-Coding(KVC)键值编码来存取的实例变量的值。使用KVC过程：首先，我们定义一个Person类，代码如下：
 12345678910111213141516171819/**Person.h*/#import &amp;lt;Foundation/Foundation.h&amp;gt">
-<meta property="og:updated_time" content="2016-03-20T12:55:25.000Z">
+<meta property="og:updated_time" content="2016-03-20T14:12:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Objective-C KVC和KVO的使用">
 <meta name="twitter:description" content="KVC的使用通常情况下，我们都是通过属性或者定义存取方法来对实例变量进行存取，但是除此之外，我们也可以通过Key-Value-Coding(KVC)键值编码来存取的实例变量的值。使用KVC过程：首先，我们定义一个Person类，代码如下：
@@ -29,11 +29,11 @@
     <link rel="alternative" href="/atom.xml" title="马占臣" type="application/atom+xml">
     
     
-    <link rel="icon" href="/img/favicon.ico">
+    <link rel="icon" href="/img/favicon">
     
     
-    <link rel="apple-touch-icon" href="/img/jacman.jpg">
-    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon" href="/img/jacman">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman">
     
     <link rel="stylesheet" href="/css/style.css" type="text/css">
 </head>
@@ -96,13 +96,6 @@
 </header>
 	<div class="article-content">
 		
-		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
-		
-			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#KVC_u7684_u4F7F_u7528"><span class="toc-number">1.</span> <span class="toc-text">KVC的使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#KVO_u7684_u4F7F_u7528"><span class="toc-number">2.</span> <span class="toc-text">KVO的使用</span></a></li></ol>
-		
-		</div>
-		
 		<h3 id="KVC_u7684_u4F7F_u7528"><a href="#KVC_u7684_u4F7F_u7528" class="headerlink" title="KVC的使用"></a>KVC的使用</h3><p>通常情况下，我们都是通过属性或者定义存取方法来对实例变量进行存取，但是除此之外，我们也可以通过Key-Value-Coding(KVC)键值编码来存取的实例变量的值。<br>使用KVC过程：<br>首先，我们定义一个Person类，代码如下：</p>
 <figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">/<span class="keyword">*</span></span><br><span class="line"><span class="keyword">*</span>Person.h</span><br><span class="line"><span class="keyword">*</span>/</span><br><span class="line"><span class="comment">#import &lt;Foundation/Foundation.h&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">@interface Person : NSObject</span></span><br><span class="line">&#123;</span><br><span class="line">    NSString <span class="keyword">*</span>_name;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">@end</span></span><br><span class="line"></span><br><span class="line">/<span class="keyword">*</span></span><br><span class="line"><span class="keyword">*</span>Person.m</span><br><span class="line"><span class="keyword">*</span>/</span><br><span class="line"><span class="comment">#import "Person.h"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">@implementation Person</span></span><br><span class="line"></span><br><span class="line"><span class="comment">@end</span></span><br></pre></td></tr></table></figure>
 <p>然后创建Person类的实例，并使用KVC对_name实例变量进行赋值和取值操作：</p>
@@ -128,7 +121,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/OC/">OC</a>
+  <span></span> <a href="/tags/设计模式/">设计模式</a>
   </div>
 
 </div>
@@ -186,6 +179,13 @@
 <aside class="clearfix">
 
   
+<div class="github-card">
+<p class="asidetitle">Github 名片</p>
+<div class="github-card" data-github="swilo1122" data-width="220" data-height="119" data-theme="medium">
+<script type="text/javascript" src="//cdn.jsdelivr.net/github-cards/latest/widget.js" ></script>
+</div>
+  </div>
+
 
 
   
@@ -211,11 +211,13 @@
 			
 		
 			
-				<li><a href="/tags/OC/" title="OC">OC<sup>1</sup></a></li>
+				<li><a href="/tags/数据解析/" title="数据解析">数据解析<sup>1</sup></a></li>
 			
 		
 			
-				<li><a href="/tags/数据解析/" title="数据解析">数据解析<sup>1</sup></a></li>
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>1</sup></a></li>
+			
+		
 			
 		
 			
@@ -276,8 +278,10 @@
 	 
 	<div class="social-font" class="clearfix">
 		
-		<a href="http://weibo.com/2176287895" target="_blank" class="icon-weibo" title="微博"></a>
+		<a href="http://weibo.com/mazhanchen" target="_blank" class="icon-weibo" title="微博"></a>
 		
+		
+		<a href="https://github.com/swilo1122" target="_blank" class="icon-github" title="github"></a>
 		
 		
 		
@@ -335,6 +339,11 @@ $(document).ready(function(){
   $(window).scroll(function(){
     o.css("top",Math.max(80,260-$(this).scrollTop()));
   });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
   
   $(window).resize(function(){
     getSize(); 

@@ -11,16 +11,40 @@
     
 
     
-    <meta name="description" content="看见别人做的APP有的时候加了很多手势，使得用户体验很好，让我非常羡慕，于是搜了一下，发现其实一点都不难，下面说一下简单的手势使用：">
+    <meta name="description" content="看见别人做的APP有的时候加了很多手势，使得用户体验很好，让我非常羡慕，于是搜了一下，发现其实一点都不难，下面说一下简单的手势知识：
+
+
+iOS将常用的触摸操作封装成了几个手势，手势识别器
+手势识别器自带判断是否成立的功能，我们只需要去使用就可以了
+使用手势需要三步：1.创建识别器对象；2.绑定识别器对象；3.实现识别器对象的方法
+
+
+我们创建一个根视图控制体RootViewController，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="给你的APP添加手势">
 <meta property="og:url" content="http://yoursite.com/2015/04/02/给你的APP添加手势/index.html">
 <meta property="og:site_name" content="马占臣">
-<meta property="og:description" content="看见别人做的APP有的时候加了很多手势，使得用户体验很好，让我非常羡慕，于是搜了一下，发现其实一点都不难，下面说一下简单的手势使用：">
-<meta property="og:updated_time" content="2016-03-21T03:46:09.000Z">
+<meta property="og:description" content="看见别人做的APP有的时候加了很多手势，使得用户体验很好，让我非常羡慕，于是搜了一下，发现其实一点都不难，下面说一下简单的手势知识：
+
+
+iOS将常用的触摸操作封装成了几个手势，手势识别器
+手势识别器自带判断是否成立的功能，我们只需要去使用就可以了
+使用手势需要三步：1.创建识别器对象；2.绑定识别器对象；3.实现识别器对象的方法
+
+
+我们创建一个根视图控制体RootViewController，">
+<meta property="og:updated_time" content="2016-03-21T08:45:29.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="给你的APP添加手势">
-<meta name="twitter:description" content="看见别人做的APP有的时候加了很多手势，使得用户体验很好，让我非常羡慕，于是搜了一下，发现其实一点都不难，下面说一下简单的手势使用：">
+<meta name="twitter:description" content="看见别人做的APP有的时候加了很多手势，使得用户体验很好，让我非常羡慕，于是搜了一下，发现其实一点都不难，下面说一下简单的手势知识：
+
+
+iOS将常用的触摸操作封装成了几个手势，手势识别器
+手势识别器自带判断是否成立的功能，我们只需要去使用就可以了
+使用手势需要三步：1.创建识别器对象；2.绑定识别器对象；3.实现识别器对象的方法
+
+
+我们创建一个根视图控制体RootViewController，">
 
     
     <link rel="alternative" href="/atom.xml" title="马占臣" type="application/atom+xml">
@@ -93,7 +117,32 @@
 </header>
 	<div class="article-content">
 		
-		<p>看见别人做的APP有的时候加了很多手势，使得用户体验很好，让我非常羡慕，于是搜了一下，发现其实一点都不难，下面说一下简单的手势使用：</p>
+		<p>看见别人做的APP有的时候加了很多手势，使得用户体验很好，让我非常羡慕，于是搜了一下，发现其实一点都不难，下面说一下简单的手势知识：</p>
+<blockquote>
+<ul>
+<li>iOS将常用的触摸操作封装成了几个手势，手势识别器</li>
+<li>手势识别器自带判断是否成立的功能，我们只需要去使用就可以了</li>
+<li>使用手势需要三步：1.创建识别器对象；2.绑定识别器对象；3.实现识别器对象的方法</li>
+</ul>
+</blockquote>
+<p>我们创建一个根视图控制体RootViewController，对应的View为RootView(rv)，在上面建立一个imageView，我们在这个imageView上面进行手势操作。<br>首先打开imageView的用户响应，因为imageView的用户响应默认是关闭的。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">self</span><span class="variable">.rv</span><span class="variable">.imageView</span><span class="variable">.userInteractionEnabled</span> = <span class="literal">YES</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="u8F7B_u62CD_u624B_u52BF"><a href="#u8F7B_u62CD_u624B_u52BF" class="headerlink" title="轻拍手势"></a>轻拍手势</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]<span class="string">initWithTarget:</span>self <span class="string">action:</span><span class="annotation">@selector</span>(<span class="string">tapAction:</span>)];</span><br><span class="line">[self.rv.imageView <span class="string">addGestureRecognizer:</span>tap];</span><br></pre></td></tr></table></figure>
+<p>响应事件：</p>
+<figure class="highlight erlang"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="pp">- <span class="params">(void)</span>tapAction:<span class="params">(<span class="variable">UITapGestureRecognizer</span> *)</span>sender</span><br><span class="line">&#123;</span><br><span class="line">    NSLog<span class="params">(@<span class="string">"不要拍我"</span>)</span>;</span><br><span class="line">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="u957F_u6309_u624B_u52BF"><a href="#u957F_u6309_u624B_u52BF" class="headerlink" title="长按手势"></a>长按手势</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]<span class="string">initWithTarget:</span>self <span class="string">action:</span><span class="annotation">@selector</span>(<span class="string">longAction:</span>)];</span><br><span class="line">[self.rv.imageView <span class="string">addGestureRecognizer:</span>longPress];</span><br><span class="line"><span class="comment">// 设置长按手势的判断时间为0.5秒</span></span><br><span class="line">longPress.minimumPressDuration = <span class="number">0.5</span>;</span><br></pre></td></tr></table></figure>
+<p>响应事件：</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">- (void)longAction:(UILongPressGestureRecognizer *)sender</span><br><span class="line">&#123;</span><br><span class="line">    // 长按手势有状态(<span class="keyword">state</span>)，开始和结束</span><br><span class="line">    if (sender.<span class="keyword">state</span> == UIGestureRecognizerStateBegan) &#123;</span><br><span class="line">        NSLog(@<span class="string">"长按开始"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    if (sender.<span class="keyword">state</span> == UIGestureRecognizerStateEnded) &#123;</span><br><span class="line">        NSLog(@<span class="string">"不要走！决战到天亮"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u65CB_u8F6C_u624B_u52BF"><a href="#u65CB_u8F6C_u624B_u52BF" class="headerlink" title="旋转手势"></a>旋转手势</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UIRotationGestureRecognizer *rotation = [[UIRotationGestureRecognizer alloc]<span class="string">initWithTarget:</span>self <span class="string">action:</span><span class="annotation">@selector</span>(<span class="string">rotationAction:</span>)];</span><br><span class="line">[self.rv.imageView <span class="string">addGestureRecognizer:</span>rotation];</span><br></pre></td></tr></table></figure>
+<p>响应事件：</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)rotationAction:(<span class="built_in">UIRotationGestureRecognizer</span> *)sender</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// imageView跟随手指旋转</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.rv</span><span class="variable">.imageView</span><span class="variable">.transform</span> = <span class="built_in">CGAffineTransformRotate</span>(<span class="keyword">self</span><span class="variable">.rv</span><span class="variable">.imageView</span><span class="variable">.transform</span>, sender<span class="variable">.rotation</span>);</span><br><span class="line">    <span class="comment">// 将角度置零</span></span><br><span class="line">    sender<span class="variable">.rotation</span> = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u634F_u5408_uFF08_u7F29_u653E_uFF09_u624B_u52BF"><a href="#u634F_u5408_uFF08_u7F29_u653E_uFF09_u624B_u52BF" class="headerlink" title="捏合（缩放）手势"></a>捏合（缩放）手势</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc]<span class="string">initWithTarget:</span>self <span class="string">action:</span><span class="annotation">@selector</span>(<span class="string">pinchAction:</span>)];</span><br><span class="line">[self.rv.imageView <span class="string">addGestureRecognizer:</span>pinch];</span><br></pre></td></tr></table></figure>
+<p>响应事件：</p>
+<figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)pinchAction:(UIPinchGestureRecognizer *)sender</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 控件跟随手指的捏合进行放大和缩小</span></span><br><span class="line">    sender.view.transform = CGAffineTransformScale(sender.view.transform, sender.<span class="built_in">scale</span>, sender.<span class="built_in">scale</span>);</span><br><span class="line">    <span class="comment">// 将放大缩小的倍数置为1</span></span><br><span class="line">    sender.<span class="built_in">scale</span> = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="u5E73_u79FB_uFF08_u62D6_u52A8_uFF09_u624B_u52BF"><a href="#u5E73_u79FB_uFF08_u62D6_u52A8_uFF09_u624B_u52BF" class="headerlink" title="平移（拖动）手势"></a>平移（拖动）手势</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc]<span class="string">initWithTarget:</span>self <span class="string">action:</span><span class="annotation">@selector</span>(<span class="string">panAction:</span>)];</span><br><span class="line">[self.rv.imageView <span class="string">addGestureRecognizer:</span>pan];</span><br></pre></td></tr></table></figure>
+<p>响应事件：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="typename">void</span>)<span class="string">panAction:</span>(UIPanGestureRecognizer *)sender</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 控件跟随手指的移动而移动</span></span><br><span class="line">    CGPoint point = [sender <span class="string">translationInView:</span>sender.view];</span><br><span class="line">    sender.view.transform = CGAffineTransformTranslate(sender.view.transform, point.x, point.y);</span><br><span class="line">    <span class="comment">// 将偏移量归零</span></span><br><span class="line">    [sender <span class="string">setTranslation:</span>CGPointZero <span class="string">inView:</span>sender.view];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>好了，手势的学习就到这里，抓紧练习去提升自己APP的bigger吧！</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -156,7 +205,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#u8F7B_u62CD_u624B_u52BF"><span class="toc-number">1.</span> <span class="toc-text">轻拍手势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u957F_u6309_u624B_u52BF"><span class="toc-number">2.</span> <span class="toc-text">长按手势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u65CB_u8F6C_u624B_u52BF"><span class="toc-number">3.</span> <span class="toc-text">旋转手势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u634F_u5408_uFF08_u7F29_u653E_uFF09_u624B_u52BF"><span class="toc-number">4.</span> <span class="toc-text">捏合（缩放）手势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#u5E73_u79FB_uFF08_u62D6_u52A8_uFF09_u624B_u52BF"><span class="toc-number">5.</span> <span class="toc-text">平移（拖动）手势</span></a></li></ol>
  
   </div>
 
@@ -210,7 +259,7 @@
         
           <li>
             
-            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            	<a href="https://henishuo.com" target="_blank" title="标哥的技术博客">标哥的技术博客</a>
             
           </li>
         

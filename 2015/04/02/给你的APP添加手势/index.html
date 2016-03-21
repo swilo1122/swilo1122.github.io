@@ -4,26 +4,23 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>GData的使用 配置arc和mrc混编 | 马占臣</title>
+    <title>给你的APP添加手势 | 马占臣</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="马占臣">
     
 
     
-    <meta name="description" content="虽然现在网络请求数据多数都是JSon数据，但是偶尔也有XML的数据，XML的解析可没有JSon那么轻松，抛开复杂的SAX解析，使用相对简单的DOM解析也不错。写这篇博是给自己保存一份资料，将来使用的时候也方便查找。
-  DOM解析比较好的一种实现方式是Google提供的GData，我们想使用这个方法需要导入类库，而且如果我们编程用的是arc的话，还会和GData发生冲突，因为GData是用mrc写">
+    <meta name="description" content="看见别人做的APP有的时候加了很多手势，使得用户体验很好，让我非常羡慕，于是搜了一下，发现其实一点都不难，下面说一下简单的手势使用：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="GData的使用 配置arc和mrc混编">
-<meta property="og:url" content="http://yoursite.com/2015/03/18/GData  配置arc和mrc混编/index.html">
+<meta property="og:title" content="给你的APP添加手势">
+<meta property="og:url" content="http://yoursite.com/2015/04/02/给你的APP添加手势/index.html">
 <meta property="og:site_name" content="马占臣">
-<meta property="og:description" content="虽然现在网络请求数据多数都是JSon数据，但是偶尔也有XML的数据，XML的解析可没有JSon那么轻松，抛开复杂的SAX解析，使用相对简单的DOM解析也不错。写这篇博是给自己保存一份资料，将来使用的时候也方便查找。
-  DOM解析比较好的一种实现方式是Google提供的GData，我们想使用这个方法需要导入类库，而且如果我们编程用的是arc的话，还会和GData发生冲突，因为GData是用mrc写">
-<meta property="og:updated_time" content="2016-03-20T12:44:14.000Z">
+<meta property="og:description" content="看见别人做的APP有的时候加了很多手势，使得用户体验很好，让我非常羡慕，于是搜了一下，发现其实一点都不难，下面说一下简单的手势使用：">
+<meta property="og:updated_time" content="2016-03-21T03:46:09.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="GData的使用 配置arc和mrc混编">
-<meta name="twitter:description" content="虽然现在网络请求数据多数都是JSon数据，但是偶尔也有XML的数据，XML的解析可没有JSon那么轻松，抛开复杂的SAX解析，使用相对简单的DOM解析也不错。写这篇博是给自己保存一份资料，将来使用的时候也方便查找。
-  DOM解析比较好的一种实现方式是Google提供的GData，我们想使用这个方法需要导入类库，而且如果我们编程用的是arc的话，还会和GData发生冲突，因为GData是用mrc写">
+<meta name="twitter:title" content="给你的APP添加手势">
+<meta name="twitter:description" content="看见别人做的APP有的时候加了很多手势，使得用户体验很好，让我非常羡慕，于是搜了一下，发现其实一点都不难，下面说一下简单的手势使用：">
 
     
     <link rel="alternative" href="/atom.xml" title="马占臣" type="application/atom+xml">
@@ -83,30 +80,21 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/03/18/GData  配置arc和mrc混编/" title="GData的使用 配置arc和mrc混编" itemprop="url">GData的使用 配置arc和mrc混编</a>
+      <a href="/2015/04/02/给你的APP添加手势/" title="给你的APP添加手势" itemprop="url">给你的APP添加手势</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="马占臣" target="_blank" itemprop="author">马占臣</a>
 		
   <p class="article-time">
-    <time datetime="2015-03-18T10:30:22.000Z" itemprop="datePublished"> 發表於 2015-03-18</time>
+    <time datetime="2015-04-02T14:14:28.000Z" itemprop="datePublished"> 發表於 2015-04-02</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>  虽然现在网络请求数据多数都是JSon数据，但是偶尔也有XML的数据，XML的解析可没有JSon那么轻松，抛开复杂的SAX解析，使用相对简单的DOM解析也不错。写这篇博是给自己保存一份资料，将来使用的时候也方便查找。</p>
-<p>  DOM解析比较好的一种实现方式是Google提供的GData，我们想使用这个方法需要导入类库，而且如果我们编程用的是arc的话，还会和GData发生冲突，因为GData是用mrc写的，因此我们还需要配置一下，实现arc和mrc的混编。 </p>
-<blockquote>
-<ul>
-<li>1.进入配置页面，build Phases - link binory with libraries，引入libxml2.tbd文件</li>
-<li>2.build settings - search paths - Header search paths<br>   输入 ${SDK_ROOT}/usr/include/libxml2</li>
-<li>3.build phases - conplie sourses 在GData和Json后面输入指令 -fno-objc-arc  （ARC和MRC的混编）</li>
-</ul>
-</blockquote>
-<p>下面是简单的应用：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1.创建解析对象</span></span><br><span class="line">GDataXMLDocument *doc = [[GDataXMLDocument alloc]<span class="string">initWithData:</span>data <span class="string">options:</span><span class="number">0</span> <span class="string">error:</span>nil];</span><br><span class="line"><span class="comment">// 2.拿到根节点</span></span><br><span class="line">GDataXMLElement *root = doc.rootElement;</span><br><span class="line"><span class="comment">// 拿到子节点</span></span><br><span class="line">NSArray *modelArray = root.children;</span><br><span class="line"><span class="comment">// 初始化data数组</span></span><br><span class="line">self.data = [NSMutableArray array];</span><br><span class="line"><span class="comment">// 遍历数组，取到每一个model对应的节点</span></span><br><span class="line"><span class="keyword">for</span> (GDataXMLElement *modelEle <span class="keyword">in</span> modelArray)</span><br><span class="line">&#123;</span><br><span class="line">    Person *p = [[Person alloc]init];</span><br><span class="line">    <span class="comment">// 获得属性节点数组</span></span><br><span class="line">    NSArray *proArray = modelEle.children;</span><br><span class="line">    <span class="keyword">for</span> (GDataXMLElement *proEle <span class="keyword">in</span> proArray)</span><br><span class="line">    &#123;</span><br><span class="line">        [p <span class="string">setValue:</span>proEle.stringValue <span class="string">forKey:</span>proEle.name];</span><br><span class="line">    &#125;</span><br><span class="line">    [self.data <span class="string">addObject:</span>p];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>  
+		<p>看见别人做的APP有的时候加了很多手势，使得用户体验很好，让我非常羡慕，于是搜了一下，发现其实一点都不难，下面说一下简单的手势使用：</p>
+  
 	</div>
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
@@ -119,7 +107,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/数据解析/">数据解析</a>
+  <span></span> <a href="/tags/Others/">Others</a>
   </div>
 
 </div>
@@ -128,7 +116,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/03/18/GData  配置arc和mrc混编/" data-title="GData的使用 配置arc和mrc混编 | 马占臣" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/04/02/给你的APP添加手势/" data-title="给你的APP添加手势 | 马占臣" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -142,18 +130,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/03/22/Objective-C KVC和KVO的使用/" title="Objective-C KVC和KVO的使用">
+ <a href="/2015/04/02/给UIView写一个category/" title="给UIView写一个category">
   <strong>上一篇：</strong><br/>
   <span>
-  Objective-C KVC和KVO的使用</span>
+  给UIView写一个category</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/02/15/myFirstBlog/"  title="我的第一篇博客">
+<a href="/2015/03/22/Objective-C KVC和KVO的使用/"  title="Objective-C KVC和KVO的使用">
  <strong>下一篇：</strong><br/> 
- <span>我的第一篇博客
+ <span>Objective-C KVC和KVO的使用
 </span>
 </a>
 </div>

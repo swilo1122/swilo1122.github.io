@@ -19,7 +19,7 @@ SQLite，是一款轻型的数据库，是遵守ACID的关系型数据库管理�
 <meta property="og:site_name" content="马占臣">
 <meta property="og:description" content="我们在开发过程中数据库是肯定需要使用的，其中移动开发过程中使用最多的可能就是SQLite了，本文就介绍一下iOS中如何使用SQlite。
 SQLite，是一款轻型的数据库，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。它能够支持Windows/Linux/Unix等等主流的操作">
-<meta property="og:updated_time" content="2016-04-05T14:33:28.000Z">
+<meta property="og:updated_time" content="2016-04-05T15:06:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS中SQLite简单使用">
 <meta name="twitter:description" content="我们在开发过程中数据库是肯定需要使用的，其中移动开发过程中使用最多的可能就是SQLite了，本文就介绍一下iOS中如何使用SQlite。
@@ -97,8 +97,8 @@ SQLite，是一款轻型的数据库，是遵守ACID的关系型数据库管理�
 	<div class="article-content">
 		
 		<p>我们在开发过程中数据库是肯定需要使用的，其中移动开发过程中使用最多的可能就是SQLite了，本文就介绍一下iOS中如何使用SQlite。</p>
-<pre><code>SQLite，是一款轻型的数据库，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。它能够支持Windows/Linux/Unix等等主流的操作系统，同时能够跟很多程序语言相结合，比如 Tcl、C#、PHP、Java等，还有ODBC接口，同样比起Mysql、PostgreSQL这两款开源的世界著名数据库管理系统来讲，它的处理速度比他们都快。SQLite第一个Alpha版本诞生于2000年5月。 至今已经有14个年头，SQLite也迎来了一个版本 SQLite 3已经发布。
-</code></pre><h3>SQLite的特性</h3>
+<p>SQLite，是一款轻型的数据库，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。它能够支持Windows/Linux/Unix等等主流的操作系统，同时能够跟很多程序语言相结合，比如 Tcl、C#、PHP、Java等，还有ODBC接口，同样比起Mysql、PostgreSQL这两款开源的世界著名数据库管理系统来讲，它的处理速度比他们都快。SQLite第一个Alpha版本诞生于2000年5月。 至今已经有14个年头，SQLite也迎来了一个版本 SQLite 3已经发布。</p>
+<h3>SQLite的特性</h3>
 
 <ol>
 <li>ACID事务 （注：①）</li>
@@ -190,8 +190,7 @@ sqlite3 *database; //sqlite3数据库句柄的指针
  while (sqlite3_step(rc)==SQLITE_ROW) {
  // sqlite3_column系列函数。一般有两个输入参数。第一个是结果集指针，第二是数据所在列的序号。
  // 比如我们现在用的sqlite3_column_int和sqlite3_column_text。
-    printf("id:%d | username:%s | password:%s \n",sqlite3_column_int(rc,               0),sqlite3_column_text(rc, 1),sqlite3_column_text(rc, 2));     
-
+    printf("id:%d | username:%s | password:%s \n",sqlite3_column_int(rc, 0),sqlite3_column_text(rc, 1),sqlite3_column_text(rc, 2));     
  }
  // 查完后一定要释放结果集。
  sqlite3_finalize(rc);

@@ -19,7 +19,7 @@ SQLite，是一款轻型的数据库，是遵守ACID的关系型数据库管理�
 <meta property="og:site_name" content="马占臣">
 <meta property="og:description" content="我们在开发过程中数据库是肯定需要使用的，其中移动开发过程中使用最多的可能就是SQLite了，本文就介绍一下iOS中如何使用SQlite。
 SQLite，是一款轻型的数据库，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。它能够支持Windows/Linux/Unix等等主流的操作">
-<meta property="og:updated_time" content="2016-04-05T14:10:10.000Z">
+<meta property="og:updated_time" content="2016-04-05T14:13:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iOS中SQLite简单使用">
 <meta name="twitter:description" content="我们在开发过程中数据库是肯定需要使用的，其中移动开发过程中使用最多的可能就是SQLite了，本文就介绍一下iOS中如何使用SQlite。
@@ -102,7 +102,10 @@ SQLite，是一款轻型的数据库，是遵守ACID的关系型数据库管理�
 <p></p><h3>SQLite的特性</h3><p></p>
 <p></p><p>1. ACID事务<br><br>ACID，是指在可靠数据库管理系统（DBMS）中，事务(transaction)所应该具有的四个特性：原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability）. 原子性意味着数据库中的事务执行是作为原子。即不可再分，整个语句要么执行，要么不执行。一致性指数据库事务不能破坏关系数据的完整性以及业务逻辑上的一致性。例如对银行转帐事务，不管事务成功还是失败，应该保证事务结束后ACCOUNTS表中Tom和Jack的存款总额为2000元。事务的隔离性是多个用户并发访问数据库时，数据库为每一个用户开启的事务，不能被其他事务的操作数据所干扰，多个并发事务之间要相互隔离。持久性是指一个事务一旦被提交，它对数据库中数据的改变就是永久性的，接下来即使数据库发生故障也不应该对其有任何影响。<br></p>
 <ol>
-<li>零配置 – 无需安装和管理配置<br><br>3.储存在单一磁盘文件中的一个完整的数据库<br><br>4.数据库文件可以在不同字节顺序的机器间自由的共享<br><br>5.支持数据库大小至2TB<br></li>
+<li>零配置 – 无需安装和管理配置<br></li>
+<li>储存在单一磁盘文件中的一个完整的数据库<br></li>
+<li>数据库文件可以在不同字节顺序的机器间自由的共享<br></li>
+<li>支持数据库大小至2TB<br></li>
 <li>足够小, 大致13万行C代码, 4.43M<br></li>
 <li>比一些流行的数据库在大部分普通数据库操作要快<br></li>
 <li>简单, 轻松的API<br></li>

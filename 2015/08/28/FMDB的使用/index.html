@@ -1,0 +1,487 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>FMDB的使用 | 马占臣</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="马占臣">
+    
+
+    
+    <meta name="description" content="由于FMDB是建立在SQLite的之上的，所以你至少也该把这篇文章从头到尾读一遍。与此同时，把SQLite的文档页 加到你的书签中。自动引用计数（APC）还是手动内存管理呢？&amp;nbsp;两种都行，FMDB会在编译的时候知道你是用的哪一种，然后进行相应处理。&amp;nbsp;使用方法&amp;nbsp;FMDB有三个主要的类1.FMDatabase &amp;ndash; 表示一个单独的SQLite数据库。 用来执行SQ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FMDB的使用">
+<meta property="og:url" content="http://yoursite.com/2015/08/28/FMDB的使用/index.html">
+<meta property="og:site_name" content="马占臣">
+<meta property="og:description" content="由于FMDB是建立在SQLite的之上的，所以你至少也该把这篇文章从头到尾读一遍。与此同时，把SQLite的文档页 加到你的书签中。自动引用计数（APC）还是手动内存管理呢？&amp;nbsp;两种都行，FMDB会在编译的时候知道你是用的哪一种，然后进行相应处理。&amp;nbsp;使用方法&amp;nbsp;FMDB有三个主要的类1.FMDatabase &amp;ndash; 表示一个单独的SQLite数据库。 用来执行SQ">
+<meta property="og:updated_time" content="2016-04-05T14:02:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FMDB的使用">
+<meta name="twitter:description" content="由于FMDB是建立在SQLite的之上的，所以你至少也该把这篇文章从头到尾读一遍。与此同时，把SQLite的文档页 加到你的书签中。自动引用计数（APC）还是手动内存管理呢？&amp;nbsp;两种都行，FMDB会在编译的时候知道你是用的哪一种，然后进行相应处理。&amp;nbsp;使用方法&amp;nbsp;FMDB有三个主要的类1.FMDatabase &amp;ndash; 表示一个单独的SQLite数据库。 用来执行SQ">
+
+    
+    <link rel="alternative" href="/atom.xml" title="马占臣" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="马占臣" title="马占臣"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="马占臣">马占臣</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/28/FMDB的使用/" title="FMDB的使用" itemprop="url">FMDB的使用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="马占臣" target="_blank" itemprop="author">马占臣</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-28T11:22:54.000Z" itemprop="datePublished"> 發表於 2015-08-28</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div>由于FMDB是建立在SQLite的之上的，所以你至少也该把这篇文章从头到尾读一遍。与此同时，把SQLite的文档页 加到你的书签中。自动引用计数（APC）还是手动内存管理呢？</div><br><div>&nbsp;</div><br><div>两种都行，FMDB会在编译的时候知道你是用的哪一种，然后进行相应处理。</div><br><div>&nbsp;</div><br><div><span style="color: rgb(51, 153, 102);"><strong>使用方法</strong></span></div><br><div>&nbsp;</div><br><div><strong>FMDB有三个主要的类</strong></div><br><div>1.FMDatabase &ndash; 表示一个单独的SQLite数据库。 用来执行SQLite的命令。</div><br><div>2.FMResultSet &ndash; 表示FMDatabase执行查询后结果集</div><br><div>3.FMDatabaseQueue &ndash; 如果你想在多线程中执行多个查询或更新，你应该使用该类。这是线程安全的。</div><br><div>&nbsp;</div><br><div><strong>数据库创建</strong></div><br><div>创建FMDatabase对象时参数为SQLite数据库文件路径。该路径可以是以下三种之一：</div><br><div>1..文件路径。该文件路径无需真实存，如果不存在会自动创建。</div><br><div>2..空字符串(@&rdquo;&quot;)。表示会在临时目录创建一个空的数据库，当FMDatabase 链接关闭时，文件也被删除。</div><br><div>3.NULL. 将创建一个内在数据库。同样的，当FMDatabase连接关闭时，数据会被销毁。</div><br><div>&nbsp;</div><br><div>(如需对临时数据库或内在数据库进行一步了解，请继续阅读：<a href="http://www.sqlite.org/inmemorydb.html" target="_blank" rel="external">http://www.sqlite.org/inmemorydb.html</a>)</div><br><pre><ol class="dp-c"><li class="alt"><span><span>FMDatabase&nbsp;<em>db&nbsp;=&nbsp;[FMDatabase&nbsp;databaseWithPath:@</em></span><span class="string">&quot;/tmp/tmp.db&quot;</span><span>];&nbsp;&nbsp;&nbsp;</span></span></li></ol></pre><br><div><strong><span style="font-size: 14px; line-height: 22px;">打开数据库</span></strong></div><br><div>在和数据库交互 之前，数据库必须是打开的。如果资源或权限不足无法打开或创建数据库，都会导致打开失败。</div><br><div>&nbsp;</div><br><pre><ol class="dp-c"><li class="alt"><span><span class="keyword">if</span><span>&nbsp;(![db&nbsp;open])&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[db&nbsp;release];&nbsp;&nbsp;&nbsp;</span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><span>;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li></ol></pre><br><div>&nbsp;</div><br><div><strong><span style="font-size: 14px; line-height: 22px;">执行更新</span></strong></div><br><div>一切不是SELECT命令的命令都视为更新。这包括 &nbsp;CREATE, UPDATE, INSERT,ALTER,COMMIT, BEGIN, DETACH, DELETE, DROP, END, EXPLAIN, VACUUM, and REPLACE &nbsp;（等）。</div><br><div>简单来说，只要不是以SELECT开头的命令都是UPDATE命令。</div><br><div>&nbsp;</div><br><div>执行更新返回一个BOOL值。YES表示执行成功，否则表示有那些错误 。你可以调用 -lastErrorMessage 和 -lastErrorCode方法来得到更多信息。</div><br><div>&nbsp;</div><br><div><strong>执行查询</strong></div><br><div>SELECT命令就是查询，执行查询的方法是以 -excuteQuery开头的。</div><br><div>&nbsp;</div><br><div>执行查询时，如果成功返回FMResultSet对象， 错误返回nil. 与执行更新相当，支持使用 NSError**参数。同时，你也可以使用 -lastErrorCode和-lastErrorMessage获知错误信息。</div><br><div>&nbsp;</div><br><div>为了遍历查询结果，你可以使用while循环。你还需要知道怎么跳到下一个记录。使用FMDB，很简单实现，就像这样：</div><br><div>&nbsp;</div><br><pre><ol class="dp-c"><li class="alt"><span><span>FMResultSet&nbsp;s&nbsp;=&nbsp;[db&nbsp;executeQuery:@</span><span class="string">&quot;SELECT&nbsp;<em>&nbsp;FROM&nbsp;myTable&quot;</em></span><span>];&nbsp;&nbsp;&nbsp;</span></span></li><li><span><span class="keyword">while</span><span>&nbsp;([s&nbsp;next])&nbsp;{&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//retrieve&nbsp;values&nbsp;for&nbsp;each&nbsp;record&nbsp;&nbsp;</span><span>&nbsp;</span></span></li><li><span>}&nbsp;&nbsp;&nbsp;</span></li></ol></pre><br><div>&nbsp;</div><br><div><span style="font-size: 14px; line-height: 22px;">你必须一直调用 &nbsp; -[FMResultSet next] &nbsp; 在你访问查询返回值之前，甚至你只想要一个记录：</span></div><br><div>&nbsp;</div><br><pre><ol class="dp-c"><li class="alt"><span><span>FMResultSet&nbsp;s&nbsp;=&nbsp;[db&nbsp;executeQuery:@</span><span class="string">&quot;SELECT&nbsp;COUNT(<em>)&nbsp;FROM&nbsp;myTable&quot;</em></span><span>];&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;([s&nbsp;next])&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">int</span><span>&nbsp;totalCount&nbsp;=&nbsp;[s&nbsp;intForColumnIndex:0];&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;</span></li></ol></pre><br><div>&nbsp;</div><br><div>FMResultSet &nbsp;提供了很多方法来获得所需的格式的值：</div><br><div>&nbsp; &nbsp;<span style="color: rgb(128, 0, 0);"> intForColumn:</span></div><br><div><span style="color: rgb(128, 0, 0);">&nbsp; &nbsp; longForColumn:</span></div><br><div><span style="color: rgb(128, 0, 0);">&nbsp; &nbsp; longLongIntForColumn:</span></div><br><div><span style="color: rgb(128, 0, 0);">&nbsp; &nbsp; boolForColumn:</span></div><br><div><span style="color: rgb(128, 0, 0);">&nbsp; &nbsp; doubleForColumn:</span></div><br><div><span style="color: rgb(128, 0, 0);">&nbsp; &nbsp; stringForColumn:</span></div><br><div><span style="color: rgb(128, 0, 0);">&nbsp; &nbsp; dataForColumn:</span></div><br><div><span style="color: rgb(128, 0, 0);">&nbsp; &nbsp; dataNoCopyForColumn:</span></div><br><div><span style="color: rgb(128, 0, 0);">&nbsp; &nbsp; UTF8StringForColumnIndex:</span></div><br><div><span style="color: rgb(128, 0, 0);">&nbsp; &nbsp; objectForColumn:</span></div><br><div>&nbsp;</div><br><div>这些方法也都包括 {type}ForColumnIndex 的这样子的方法，参数是查询结果集的列的索引位置。</div><br><div>&nbsp;</div><br><div>你无需调用 &nbsp;[FMResultSet close]来关闭结果集, 当新的结果集产生，或者其数据库关闭时，会自动关闭。</div><br><div>&nbsp;</div><br><div><strong>关闭数据库</strong></div><br><div>当使用完数据库，你应该 -close 来关闭数据库连接来释放SQLite使用的资源。</div><br><div>&nbsp; &nbsp; [db close]; &nbsp;</div><br><div>&nbsp;</div><br><div><span style="color: rgb(51, 153, 102);"><strong>事务</strong></span></div><br><div>&nbsp;</div><br><div><strong>FMDatabase是支持事务的。</strong></div><br><div>&nbsp;</div><br><div><strong>数据净化（数据格式化）</strong></div><br><div>&nbsp;</div><br><div>使用FMDB，插入数据前，你不要花时间审查你的数据。你可以使用标准的SQLite数据绑定语法。</div><br><div>&nbsp;</div><br><pre><ol class="dp-c"><li class="alt"><span><span>INSERT&nbsp;INTO&nbsp;myTable&nbsp;VALUES&nbsp;(?,&nbsp;?,&nbsp;?)&nbsp;&nbsp;&nbsp;</span></span></li></ol></pre><br><div><span style="font-size: 14px; line-height: 22px;">SQLite会识别 &ldquo;?&rdquo; 为一个输入的点位符， 这样的执行会接受一个可变参数（或者表示为其他参数，如NSArray, NSDictionary,或va_list等），会正确为您转义。</span></div><br><div>&nbsp;</div><br><div>你也可以选择使用命名参数语法。</div><br><div>&nbsp;</div><br><pre><ol class="dp-c"><li class="alt"><span><span>INSERT&nbsp;INTO&nbsp;myTable&nbsp;VALUES&nbsp;(:id,&nbsp;:name,&nbsp;:value)&nbsp;&nbsp;&nbsp;</span></span></li></ol></pre><br><div><span style="font-size: 14px; line-height: 22px;">参数名必须以冒名开头。SQLite本身支持其他字符，当Dictionary key的内部实现是冒号开头。注意你的NSDictionary key不要包含冒号。</span></div><br><div>&nbsp;</div><br><pre><ol class="dp-c"><li class="alt"><span><span>NSDictionary&nbsp;argsDict&nbsp;=&nbsp;[NSDictionary&nbsp;dictionaryWithObjectsAndKeys:@</span><span class="string">&quot;My&nbsp;Name&quot;</span><span>,&nbsp;@</span><span class="string">&quot;name&quot;</span><span>,&nbsp;nil];&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;[db&nbsp;executeUpdate:@<span class="string">&quot;INSERT&nbsp;INTO&nbsp;myTable&nbsp;(name)&nbsp;VALUES&nbsp;(:name)&quot;</span><span>&nbsp;withParameterDictionary:argsDict];&nbsp;&nbsp;&nbsp;</span></span></li></ol></pre><br><div>&nbsp;</div><br><div><span style="font-size: 14px; line-height: 22px;">而且，代码不能这么写（为什么？想想吧。）</span></div><br><pre><ol class="dp-c"><li class="alt"><span><span>[db&nbsp;executeUpdate:@</span><span class="string">&quot;INSERT&nbsp;INTO&nbsp;myTable&nbsp;VALUES&nbsp;(?)&quot;</span><span>,&nbsp;@</span><span class="string">&quot;this&nbsp;has&nbsp;\&quot;&nbsp;lots&nbsp;of&nbsp;’&nbsp;bizarre&nbsp;\&quot;&nbsp;quotes&nbsp;’&quot;</span><span>];&nbsp;</span></span></li></ol></pre><br><div><span style="font-size: 14px; line-height: 22px;">你应该：</span></div><br><div>&nbsp;</div><br><pre><ol class="dp-c"><li class="alt"><span><span>[db&nbsp;executeUpdate:@</span><span class="string">&quot;INSERT&nbsp;INTO&nbsp;myTable&nbsp;VALUES&nbsp;(?)&quot;</span><span>,&nbsp;@</span><span class="string">&quot;this&nbsp;has&nbsp;&quot;</span><span>&nbsp;lots&nbsp;of&nbsp;</span><span class="string">‘&nbsp;bizarre&nbsp;&quot;&nbsp;quotes&nbsp;’</span><span>&quot;];&nbsp;&nbsp;&nbsp;</span></span></li></ol></pre><br><div>&nbsp;</div><br><div><span style="font-size: 14px; line-height: 22px;">提供给 -executeUpdate: 方法的参数都必须是对象。就像以下的代码就无法工作，且会产生崩溃。</span></div><br><pre><ol class="dp-c"><li class="alt"><span><span>[db&nbsp;executeUpdate:@</span><span class="string">&quot;INSERT&nbsp;INTO&nbsp;myTable&nbsp;VALUES&nbsp;(?)&quot;</span><span>,&nbsp;42];&nbsp;&nbsp;&nbsp;</span></span></li></ol></pre><br><div>&nbsp;<span style="font-size: 14px; line-height: 22px;">正确有做法是把数字打包成 NSNumber对象</span></div><br><pre><ol class="dp-c"><li class="alt"><span><span>[db&nbsp;executeUpdate:@</span><span class="string">&quot;INSERT&nbsp;INTO&nbsp;myTable&nbsp;VALUES&nbsp;(?)&quot;</span><span>,&nbsp;[NSNumber&nbsp;numberWithInt:42]];&nbsp;&nbsp;&nbsp;</span></span></li></ol></pre><br><div><span style="font-size: 14px; line-height: 22px;">或者，你可以使用 &nbsp;-execute<em>WithFormat: ，这是NSString风格的参数</em></span></div><br><pre><ol class="dp-c"><li class="alt"><span><span>[db&nbsp;executeUpdateWithFormat:@</span><span class="string">&quot;INSERT&nbsp;INTO&nbsp;myTable&nbsp;VALUES&nbsp;(%d)&quot;</span><span>,&nbsp;42];&nbsp;&nbsp;&nbsp;</span></span></li></ol></pre><br><div>&nbsp;<span style="font-size: 14px; line-height: 22px;">-executeWithFormat: &nbsp;的方法的内部实现会帮你封装数据， 以下这些修饰符都可以使用： %@, %c, %s, %d, %D,%i, %u, %U, %hi, %hu, %qi, %qu, %f, %g, %ld, %lu, %lld, and %llu. &nbsp;除此之外的修饰符可能导致无法预知的结果。 一些情况下，你需要在SQL语句中使用 % 字符，你应该使用 %%。</span></div><br><div>&nbsp;</div><br><div><strong>使用FMDatabaseQueue 及线程安全</strong></div><br><div>在多个线程中同时使用一个FMDatabase实例是不明智的。现在你可以为每个线程创建一个FMDatabase对象。 不要让多个线程分享同一个实例，它无法在多个线程中同时使用。 若此，坏事会经常发生，程序会时不时崩溃，或者报告异常，或者陨石会从天空中掉下来砸到你Mac Pro. &nbsp;总之很崩溃。所以，不要初始化FMDatabase对象，然后在多个线程中使用。请使用 FMDatabaseQueue，它是你的朋友而且会帮助你。以下是使用方法：</div><br><div>&nbsp;</div><br><div>首先创建队列。</div><br><div>&nbsp;</div><br><pre><ol class="dp-c"><li class="alt"><span><span>FMDatabaseQueue&nbsp;<em>queue&nbsp;=&nbsp;[FMDatabaseQueue&nbsp;databaseQueueWithPath:aPath];&nbsp;</em></span></span></li></ol></pre><br><div>这样使用。</div><br><pre><ol class="dp-c"><li class="alt"><span><span>[queue&nbsp;inDatabase:^(FMDatabase&nbsp;db)&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[db&nbsp;executeUpdate:@<span class="string">&quot;INSERT&nbsp;INTO&nbsp;myTable&nbsp;VALUES&nbsp;(?)&quot;</span><span>,&nbsp;[NSNumber&nbsp;numberWithInt:1]];&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[db&nbsp;executeUpdate:@<span class="string">&quot;INSERT&nbsp;INTO&nbsp;myTable&nbsp;VALUES&nbsp;(?)&quot;</span><span>,&nbsp;[NSNumber&nbsp;numberWithInt:2]];&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[db&nbsp;executeUpdate:@<span class="string">&quot;INSERT&nbsp;INTO&nbsp;myTable&nbsp;VALUES&nbsp;(?)&quot;</span><span>,&nbsp;[NSNumber&nbsp;numberWithInt:3]];&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FMResultSet&nbsp;<em>rs&nbsp;=&nbsp;[db&nbsp;executeQuery:@<span class="string">&quot;select&nbsp;</span></em>&nbsp;from&nbsp;foo&quot;</span><span>];&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">while</span><span>([rs&nbsp;next])&nbsp;{&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&hellip;&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;</span></li><li class="alt"><span>}];&nbsp;&nbsp;&nbsp;</span></li></ol></pre><br><div><span style="font-size: 14px; line-height: 22px;">像这样，轻松地把简单任务包装到事务里：</span></div><br><pre><ol class="dp-c"><li class="alt"><span><span>[queue&nbsp;inTransaction:^(FMDatabase&nbsp;<em>db,&nbsp;BOOL&nbsp;</em>rollback)&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[db&nbsp;executeUpdate:@<span class="string">&quot;INSERT&nbsp;INTO&nbsp;myTable&nbsp;VALUES&nbsp;(?)&quot;</span><span>,&nbsp;[NSNumber&nbsp;numberWithInt:1]];&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[db&nbsp;executeUpdate:@<span class="string">&quot;INSERT&nbsp;INTO&nbsp;myTable&nbsp;VALUES&nbsp;(?)&quot;</span><span>,&nbsp;[NSNumber&nbsp;numberWithInt:2]];&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[db&nbsp;executeUpdate:@<span class="string">&quot;INSERT&nbsp;INTO&nbsp;myTable&nbsp;VALUES&nbsp;(?)&quot;</span><span>,&nbsp;[NSNumber&nbsp;numberWithInt:3]];&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span><span>&nbsp;(whoopsSomethingWrongHappened)&nbsp;{&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*rollback&nbsp;=&nbsp;YES;&nbsp;<span class="keyword">return</span><span>;&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;</span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">//&nbsp;etc&hellip;&nbsp;&nbsp;&nbsp;</span><span>&nbsp;</span></span></li><li class="alt"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[db&nbsp;executeUpdate:@<span class="string">&quot;INSERT&nbsp;INTO&nbsp;myTable&nbsp;VALUES&nbsp;(?)&quot;</span><span>,&nbsp;[NSNumber&nbsp;numberWithInt:4]];&nbsp;&nbsp;&nbsp;&nbsp;</span></span></li><li><span>&nbsp;&nbsp;&nbsp;&nbsp;}];&nbsp;&nbsp;&nbsp;</span></li></ol></pre><br><div>&nbsp;</div><br><div>&nbsp;<span style="font-size: 14px; line-height: 22px;">FMDatabaseQueue &nbsp;后台会建立系列化的G-C-D队列，并执行你传给G-C-D队列的块。这意味着 你从多线程同时调用调用方法，GDC也会按它接收的块的顺序来执行。谁也不会吵到谁的脚 ，每个人都幸福。</span></div><br><div>&nbsp;</div>
+
+<p>—-转载自FMDB官方文档</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/OC/">OC</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/FMDB/">FMDB</a><a href="/tags/第三方框架/">第三方框架</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/08/28/FMDB的使用/" data-title="FMDB的使用 | 马占臣" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/08/25/iOS中SQLite简单使用/"  title="iOS中SQLite简单使用">
+ <strong>下一篇：</strong><br/> 
+ <span>iOS中SQLite简单使用
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分類</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/OC/" title="OC">OC<sup>8</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">標簽</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Others/" title="Others">Others<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/第三方框架/" title="第三方框架">第三方框架<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数据解析/" title="数据解析">数据解析<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数据库/" title="数据库">数据库<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/FMDB/" title="FMDB">FMDB<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/手势/" title="手势">手势<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/others/" title="others">others<sup>1</sup></a></li>
+			
+		
+			
+		
+			
+		
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情鏈接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://henishuo.com" target="_blank" title="标哥的技术博客">标哥的技术博客</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Swilo. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/mazhanchen" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/swilo1122" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="马占臣">马占臣</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

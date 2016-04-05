@@ -1,0 +1,586 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>iOS中SQLite简单使用 | 马占臣</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="马占臣">
+    
+
+    
+    <meta name="description" content="我们在开发过程中数据库是肯定需要使用的，其中移动开发过程中使用最多的可能就是SQLite了，本文就介绍一下iOS中如何使用SQlite。
+SQLite，是一款轻型的数据库，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。它能够支持Windows/Linux/Unix等等主流的操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS中SQLite简单使用">
+<meta property="og:url" content="http://yoursite.com/2015/08/25/iOS中SQLite简单使用/index.html">
+<meta property="og:site_name" content="马占臣">
+<meta property="og:description" content="我们在开发过程中数据库是肯定需要使用的，其中移动开发过程中使用最多的可能就是SQLite了，本文就介绍一下iOS中如何使用SQlite。
+SQLite，是一款轻型的数据库，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。它能够支持Windows/Linux/Unix等等主流的操作">
+<meta property="og:updated_time" content="2016-04-05T14:10:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS中SQLite简单使用">
+<meta name="twitter:description" content="我们在开发过程中数据库是肯定需要使用的，其中移动开发过程中使用最多的可能就是SQLite了，本文就介绍一下iOS中如何使用SQlite。
+SQLite，是一款轻型的数据库，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。它能够支持Windows/Linux/Unix等等主流的操作">
+
+    
+    <link rel="alternative" href="/atom.xml" title="马占臣" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="马占臣" title="马占臣"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="马占臣">马占臣</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/25/iOS中SQLite简单使用/" title="iOS中SQLite简单使用" itemprop="url">iOS中SQLite简单使用</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="马占臣" target="_blank" itemprop="author">马占臣</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-25T06:36:20.000Z" itemprop="datePublished"> 發表於 2015-08-25</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<p>我们在开发过程中数据库是肯定需要使用的，其中移动开发过程中使用最多的可能就是SQLite了，本文就介绍一下iOS中如何使用SQlite。</p>
+<pre><code>SQLite，是一款轻型的数据库，是遵守ACID的关系型数据库管理系统，它的设计目标是嵌入式的，而且目前已经在很多嵌入式产品中使用了它，它占用资源非常的低，在嵌入式设备中，可能只需要几百K的内存就够了。它能够支持Windows/Linux/Unix等等主流的操作系统，同时能够跟很多程序语言相结合，比如 Tcl、C#、PHP、Java等，还有ODBC接口，同样比起Mysql、PostgreSQL这两款开源的世界著名数据库管理系统来讲，它的处理速度比他们都快。SQLite第一个Alpha版本诞生于2000年5月。 至今已经有14个年头，SQLite也迎来了一个版本 SQLite 3已经发布。
+</code></pre><p><span id="more-123"></span></p><p></p>
+<p></p><h3>SQLite的特性</h3><p></p>
+<p></p><p>1. ACID事务<br><br>ACID，是指在可靠数据库管理系统（DBMS）中，事务(transaction)所应该具有的四个特性：原子性（Atomicity）、一致性（Consistency）、隔离性（Isolation）、持久性（Durability）. 原子性意味着数据库中的事务执行是作为原子。即不可再分，整个语句要么执行，要么不执行。一致性指数据库事务不能破坏关系数据的完整性以及业务逻辑上的一致性。例如对银行转帐事务，不管事务成功还是失败，应该保证事务结束后ACCOUNTS表中Tom和Jack的存款总额为2000元。事务的隔离性是多个用户并发访问数据库时，数据库为每一个用户开启的事务，不能被其他事务的操作数据所干扰，多个并发事务之间要相互隔离。持久性是指一个事务一旦被提交，它对数据库中数据的改变就是永久性的，接下来即使数据库发生故障也不应该对其有任何影响。<br></p>
+<ol>
+<li>零配置 – 无需安装和管理配置<br><br>3.储存在单一磁盘文件中的一个完整的数据库<br><br>4.数据库文件可以在不同字节顺序的机器间自由的共享<br><br>5.支持数据库大小至2TB<br></li>
+<li>足够小, 大致13万行C代码, 4.43M<br></li>
+<li>比一些流行的数据库在大部分普通数据库操作要快<br></li>
+<li>简单, 轻松的API<br></li>
+<li>包含TCL绑定, 同时通过Wrapper支持其他语言的绑定<br></li>
+<li>良好注释的源代码, 并且有着90%以上的测试覆盖率<br></li>
+<li>独立，没有额外依赖<br></li>
+<li>源码完全的开源, 你可以用于任何用途, 包括出售它<br></li>
+<li>支持多种开发语言,C, PHP, Perl, Java, C#,Python, Ruby<p></p><br><h3>SQLite在iOS中的基本使用</h3><br><p>在iOS开发中可以用一些SQLite数据库管理工具，例如SQLiteManager。<br><br>接下来就通过代码来讲述iOS中如何使用sqlite<br><br>sqlite.h文件的引入<br><br>首先是打开和关闭数据库，打开和创建数据库都是sqlite3_open函数，如果filename已经创建那就是打开。</p><br><pre lang="objc" escaped="true" style="background: #E8F2FB ;"><br>NSString <em>filename;//数据库文件路径<br>sqlite3 </em>database; //sqlite3数据库句柄的指针<br>//打开数据库</pre></li>
+</ol>
+<ul>
+<li>(int) open{<br>  int rc=sqlite3_open([filename UTF8String], &amp;database);<br>  if (rc) {<pre><code>sqlite3_close(database);
+NSLog(@&quot;open database failed&quot;);
+</code></pre>  }<br>  return rc;<br>}<br>//关闭数据库</li>
+<li><p>(void) close{<br>  if (database!=NULL) {</p>
+<pre><code>sqlite3_close(database);
+</code></pre><p>  }<br>}<br><br></p><p>接下来插入、删除、更新都是用sqlite3_exec函数，记住执行语句，必须要先打开数据库，完成之后需要关闭数据库。</p><br><pre lang="objc" escaped="true" style="background: #E8F2FB ;"><br>//执行 insert,update,delete 等非查询SQL语句<p></p>
+<ul>
+<li>(int)executeNonQuery:(NSString <em>)sql error:(NSError **)error {<br> int rc;<br> char </em>errmsg;<br> rc = [self open];<br> if (rc) {<br>//错误处理<br> if (error != NULL) {<pre><code>NSDictionary *eDict =
+[NSDictionary dictionaryWithObject:@&quot;open database failed&quot;
+forKey:NSLocalizedDescriptionKey];
+*error =
+[NSError errorWithDomain:kSqliteErrorDomain code:rc userInfo:eDict];
+</code></pre> }<br> return rc;<br>}<br> rc = sqlite3_exec(database, [sql UTF8String], NULL, NULL, &amp;errmsg);<br> if (rc != SQLITE_OK) {<pre><code>if (error != NULL) {
+    NSDictionary *eDict =
+    [NSDictionary dictionaryWithObject:@&quot;exec sql error&quot;
+    forKey:NSLocalizedDescriptionKey];
+    *error =
+    [NSError errorWithDomain:kSqliteErrorDomain code:rc userInfo:eDict];
+}
+NSLog(@&quot;%s&quot;, errmsg);
+sqlite3_free(errmsg);
+</code></pre> }<br> [self close];<br> return rc;<br>}</li></ul></pre><br><p>上面函数中sqlite3_free就是释放存放错误信息的内存空间。<br><br>查询操作会略显复杂，同样需要有开关数据库的操作，不过有一个准备结果集和最后释放结果集的操作，分别是sqlite3_prepare_v2和sqlite3_finalize，sqlite3_stmt就是结果集，下面就是具体操作。</p><br><pre lang="objc" escaped="true" style="background: #E8F2FB ;">[self open];<br>// 查<br>strsql = “select <em> from users”;<br>// SQLITE_API int sqlite3_prepare_v2(<br>// sqlite3 </em>db, /<em> Database handle </em>/<br>// const char <em>zSql, /</em> SQL statement<em>/<br>// int nByte, /</em> 结果集的最大长度。<em>/<br>// sqlite3_stmt **ppStmt, /</em> OUT: 结果集 <em>/<br>// const char **pzTail /</em> OUT:指向结果集没有用到的内存部分的指针。 <em>/<br>// );<br>sqlite3_stmt</em> rc;//陈述式句柄<br>if (sqlite3_prepare_v2(db, strsql, -1, &amp;rc, NULL)!=SQLITE_OK) {<br>}<br>// sqlite3_step讲结果集数据指针指向下一个元素。<br>// 这个函数的返回值如果是SQLITE_ROW就表示我们的结果集里面有数据。<br>// 否则我们的结果集就是空的。<br>while (sqlite3_step(rc)==SQLITE_ROW) {<br>// sqlite3_column系列函数。一般有两个输入参数。第一个是结果集指针，第二是数据所在列的序号。<br>// 比如我们现在用的sqlite3_column_int和sqlite3_column_text。<br>printf(“id:%d | username:%s | password:%s \n”,sqlite3_column_int(rc,               0),sqlite3_column_text(rc, 1),sqlite3_column_text(rc, 2));     </pre></li>
+</ul>
+<p>}<br>// 查完后一定要释放结果集。<br>sqlite3_finalize(rc);<br>[self close];<br></p><h3>数据库加密</h3><br><p>免费版的SQLite有一个致命缺点：不支持加密。这就导致存储在SQLite中的数据可以被任何人用任何文本编辑器查看到。<br><br>对数据库加密的思路有两种：<br></p>
+
+
+<ol>
+<li>将内容加密后再写入数据库<br><br>这种方式使用简单，在入库/出库只需要将字段做对应的加解密操作即可，一定程度上解决了将数据赤裸裸暴露的问题。<br><br>不过这种方式并不是彻底的加密，因为数据库的表结构等信息还是能被查看到。另外写入数据库的内容加密后，搜索也是个问题。<br></li>
+<li><p>对数据库文件加密<br><br>将整个数据库整个文件加密，这种方式基本上能解决数据库的信息安全问题。目前已有的SQLite加密基本都是通过这种方式实现的。这里就介绍一个开源的加密工具SQLCipher，安装方法可以参照官网文档，<a target="_blank" href="https://www.zetetic.net/sqlcipher/ios-tutorial/" title="https://www.zetetic.net/sqlcipher/ios-tutorial/">https://www.zetetic.net/sqlcipher/ios-tutorial/</a>，SQLCipher使用256-bit AES加密，由于其基于免费版的SQLite，主要的加密接口和SQLite是相同的，但也增加了一些自己的接口。<br><br>其实SQLite的两个加密函数使用起来非常的简单，下面分情况说明：<br><br>1 给一个未加密的数据库添加密码：如果想要添加密码，则可以在打开数据库文件之后，关闭数据库文件之前的任何时刻调用sqlite3_key函数即可，该函数有三个参数，其中第一个参数为数据库对象，第二个参数是要设定的密码，第三个是密码的长度。例如：sqlite3_key(db,&#8221;1q2w3e4r&#8221;,8); //给数据库设定密码1q2w3e4r<br><br>2 读取一个加密数据库中的数据：完成这个任务依然十分简单，你只需要在打开数据库之后，再次调用一下sqlite3_key函数即可，例如，数据库密码是123456时，你只需要在代码中加入sqlite3_key(db,&#8221;123456&#8243;,6);<br><br>3更改数据库密码：首先你需要使用当前的密码正确的打开数据库，之后你可以调用sqlite3_rekey(db,&#8221;112233&#8243;,6) 来更改数据库密码。<br><br>4 删除密码：也就是把数据库恢复到明文状态。这时你仍然只需要调用sqlite3_rekey函数，并且把该函数的第二个参数置为NULL或者&#8221;&#8221;,或者把第三个参数设为0。</p><br><h3>事务操作</h3><br><p>那么问题又来了，如果iOS的sqlite同时插入或者查询10000条数据，你该怎么办？<br><br>这里有三步要做，第一，减少开关数据库操作，插入10000条数据，不能开关10000次数据库，只能进行一次开关；<br><br>第二，就是不能放在主线程；<br><br>第三，最重要的一点就是加入事务操作。<br><br>事务(Transaction)是访问并可能更新数据库中各种数据项的一个程序执行单元(unit)。在sqlite插入数据的时候默认一条语句就是一个事务，有多少条数据就有多少次磁盘操作。所以10000次磁盘操作可能几分钟都做不完，这个时候需要把10000条语句都封装成一个事务。<br><br>下面就是开始事务和提交事务的代码了</p><p></p>
+<pre lang="objc" escaped="true" style="background: #E8F2FB ;">
+-(int)beginService{
+  char *errmsg;
+  int rc = sqlite3_exec(database, "BEGIN transaction", NULL, NULL, &amp;errmsg);
+  return rc;
+}
+-(int)commitService{
+  char *errmsg;
+  int rc = sqlite3_exec(database, "COMMIT transaction", NULL, NULL, &amp;errmsg);
+  return rc;
+}</pre>
+<p>接下来就把三个操作合并</p>
+<pre lang="objc" escaped="true" style="background: #E8F2FB ;">-(int)addModelsTest:(NSArray *)models error:(NSError **) error{
+  char *errmsg;
+  __block NSMutableArray *sqls=[NSMutableArray array];
+  __block NoticeModel *aModel=[[NoticeModel alloc] init];
+  dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+      for (int i=0; i&lt;100000; i++) {
+          aModel=[models objectAtIndex:0];
+          NSString *sql=[NSString stringWithFormat:@"insert into notices     values('%lf','%d','%@','%@','%@','%d','%d','%d','%d','%@')",aModel.myID,aModel.news_id,aModel.news_title,aModel.content,aModel.pic,aModel.sort,aModel.record_status,aModel.counter,aModel.suid,aModel.publish_time];
+          [sqls addObject:sql];
+      }
+      int r1=[self open];
+      [self beginService];
+      int rc;
+      int i;
+      for (i=0; i&lt;100000; i++) {
+          rc=sqlite3_exec(database, [[sqls objectAtIndex:i] UTF8String], NULL, NULL, &amp;errmsg);
+      }
+      [self commitService];
+      [self close];
+      if (i ==100000) {
+          dispatch_async(dispatch_get_main_queue(), ^{
+              NSLog(@"call back, the data is: %@", i);
+          });
+      } else {
+          NSLog(@"error when download:%@", error);
+      }
+  });
+  return 0;
+}</pre>
+
+<p>—-本文为转载，如有侵权，请及时告知，谢谢！</p>
+</li>
+</ol>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/OC/">OC</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/数据库/">数据库</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/08/25/iOS中SQLite简单使用/" data-title="iOS中SQLite简单使用 | 马占臣" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/08/28/FMDB的使用/" title="FMDB的使用">
+  <strong>上一篇：</strong><br/>
+  <span>
+  FMDB的使用</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/07/11/写一个完美单例Singleton/"  title="写一个完美单例Singleton">
+ <strong>下一篇：</strong><br/> 
+ <span>写一个完美单例Singleton
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">1.</span> <span class="toc-text">SQLite的特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">2.</span> <span class="toc-text">SQLite在iOS中的基本使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">3.</span> <span class="toc-text">数据库加密</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#undefined"><span class="toc-number">4.</span> <span class="toc-text">事务操作</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分類</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/OC/" title="OC">OC<sup>8</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">標簽</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Others/" title="Others">Others<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/第三方框架/" title="第三方框架">第三方框架<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数据解析/" title="数据解析">数据解析<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数据库/" title="数据库">数据库<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/FMDB/" title="FMDB">FMDB<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/手势/" title="手势">手势<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/others/" title="others">others<sup>1</sup></a></li>
+			
+		
+			
+		
+			
+		
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情鏈接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://henishuo.com" target="_blank" title="标哥的技术博客">标哥的技术博客</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Swilo. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/mazhanchen" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/swilo1122" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="马占臣">马占臣</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

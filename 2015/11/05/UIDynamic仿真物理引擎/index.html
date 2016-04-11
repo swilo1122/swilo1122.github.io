@@ -1,0 +1,554 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>UIDynamic仿真物理引擎 | 马占臣</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="马占臣">
+    
+
+    
+    <meta name="description" content="1.什么是UIDynamic
+UIDynamic是从iOS 7开始引入的一种新技术，隶属于UIKit框架
+它可以认为是一种物理引擎，能模拟和仿真现实生活中的物理现象
+如：重力、弹性碰撞等现象
+2.物理引擎的价值
+广泛用于游戏开发，经典成功案例是“愤怒的小鸟”
+让开发人员可以在远离物理学公式的情况下，实现炫酷的物理仿真效果
+提高了游戏开发效率，产生更多优秀好玩的物理仿真游戏
+3.使用步骤要想使用UI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UIDynamic仿真物理引擎">
+<meta property="og:url" content="http://yoursite.com/2015/11/05/UIDynamic仿真物理引擎/index.html">
+<meta property="og:site_name" content="马占臣">
+<meta property="og:description" content="1.什么是UIDynamic
+UIDynamic是从iOS 7开始引入的一种新技术，隶属于UIKit框架
+它可以认为是一种物理引擎，能模拟和仿真现实生活中的物理现象
+如：重力、弹性碰撞等现象
+2.物理引擎的价值
+广泛用于游戏开发，经典成功案例是“愤怒的小鸟”
+让开发人员可以在远离物理学公式的情况下，实现炫酷的物理仿真效果
+提高了游戏开发效率，产生更多优秀好玩的物理仿真游戏
+3.使用步骤要想使用UI">
+<meta property="og:updated_time" content="2016-04-11T15:07:51.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="UIDynamic仿真物理引擎">
+<meta name="twitter:description" content="1.什么是UIDynamic
+UIDynamic是从iOS 7开始引入的一种新技术，隶属于UIKit框架
+它可以认为是一种物理引擎，能模拟和仿真现实生活中的物理现象
+如：重力、弹性碰撞等现象
+2.物理引擎的价值
+广泛用于游戏开发，经典成功案例是“愤怒的小鸟”
+让开发人员可以在远离物理学公式的情况下，实现炫酷的物理仿真效果
+提高了游戏开发效率，产生更多优秀好玩的物理仿真游戏
+3.使用步骤要想使用UI">
+
+    
+    <link rel="alternative" href="/atom.xml" title="马占臣" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="马占臣" title="马占臣"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="马占臣">马占臣</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/11/05/UIDynamic仿真物理引擎/" title="UIDynamic仿真物理引擎" itemprop="url">UIDynamic仿真物理引擎</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="马占臣" target="_blank" itemprop="author">马占臣</a>
+		
+  <p class="article-time">
+    <time datetime="2015-11-05T14:59:52.000Z" itemprop="datePublished"> 發表於 2015-11-05</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<p>1.什么是UIDynamic</p>
+<p>UIDynamic是从iOS 7开始引入的一种新技术，隶属于UIKit框架</p>
+<p>它可以认为是一种物理引擎，能模拟和仿真现实生活中的物理现象</p>
+<p>如：重力、弹性碰撞等现象</p>
+<p>2.物理引擎的价值</p>
+<p>广泛用于游戏开发，经典成功案例是“愤怒的小鸟”</p>
+<p>让开发人员可以在远离物理学公式的情况下，实现炫酷的物理仿真效果</p>
+<p>提高了游戏开发效率，产生更多优秀好玩的物理仿真游戏</p>
+<p>3.使用步骤<br>要想使用UIDynamic来实现物理仿真效果，大致的步骤如下</p>
+<p>（1）创建一个物理仿真器（顺便设置仿真范围）</p>
+<p>（2）创建相应的物理仿真行为（顺便添加物理仿真元素）</p>
+<p>（3）将物理仿真行为添加到物理仿真器中,开始仿真</p>
+<p>物理仿真元素:</p>
+<p>不是任何对象都能做物理仿真元素</p>
+<p>不是任何对象都能进行物理仿真</p>
+<p>物理仿真元素要素：</p>
+<p>任何遵守了UIDynamicItem协议的对象</p>
+<p>UIView默认已经遵守了UIDynamicItem协议，因此任何UI控件都能做物理仿真<br>另外,UICollectionViewLayoutAttributes类默认也遵守UIDynamicItem协议</p>
+<p>物理仿真行为<br>（1）UIDynamic提供了以下几种物理仿真行为</p>
+<p>UIGravityBehavior：重力行为</p>
+<p>UICollisionBehavior：碰撞行为</p>
+<p>UISnapBehavior：捕捉行为</p>
+<p>UIPushBehavior：推动行为</p>
+<p>UIAttachmentBehavior：附着行为</p>
+<p>UIDynamicItemBehavior：动力元素行为</p>
+<p>（2）物理仿真行为须知</p>
+<p>上述所有物理仿真行为都继承自UIDynamicBehavior</p>
+<p>所有的UIDynamicBehavior都可以独立进行</p>
+<p>组合使用多种行为时，可以实现一些比较复杂的效果</p>
+<p>好了,啰嗦一大堆网上找个概念,下面上代码吧!</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"ViewController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> *  物理仿真元素</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UIView</span> *redView;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">weak</span>, <span class="keyword">nonatomic</span>) <span class="keyword">IBOutlet</span> <span class="built_in">UISearchBar</span> *sb;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span><br><span class="line"> *  物理仿真器</span><br><span class="line"> */</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>)<span class="built_in">UIDynamicAnimator</span> *dynamic;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/**</span><br><span class="line"> *  这个物理仿真器需要创建一个全局的,不然touch后直接就释放了并不能实现物理仿真效果</span><br><span class="line"> */</span></span><br><span class="line">- (<span class="built_in">UIDynamicAnimator</span> *)dynamic</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!_dynamic) &#123;</span><br><span class="line">        _dynamic = [[<span class="built_in">UIDynamicAnimator</span> alloc]initWithReferenceView:<span class="keyword">self</span><span class="variable">.view</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _dynamic;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span>&lt;<span class="built_in">UITouch</span> *&gt; *)touches withEvent:(<span class="built_in">UIEvent</span> *)event &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 模拟物理仿真行为</span></span><br><span class="line">    <span class="comment">// 1.创建物理仿真器,并且指定当前控制器的View作为物理仿真范围</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 2.创建物理仿真行为,并且指定redView为物理仿真元素</span></span><br><span class="line">    <span class="built_in">UIGravityBehavior</span> *gravity = [[<span class="built_in">UIGravityBehavior</span> alloc]initWithItems:@[<span class="keyword">self</span><span class="variable">.redView</span>]];</span><br><span class="line">    <span class="comment">// 设置重力的方向</span></span><br><span class="line">    gravity<span class="variable">.gravityDirection</span> = <span class="built_in">CGVectorMake</span>(<span class="number">1.0</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="comment">// 设置重力的角度</span></span><br><span class="line">    <span class="comment">// gravity.angle = M_PI;</span></span><br><span class="line">    <span class="comment">// 设置加速度</span></span><br><span class="line">    gravity<span class="variable">.magnitude</span> =  <span class="number">10.0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建碰撞仿真行为</span></span><br><span class="line">    <span class="built_in">UICollisionBehavior</span> *collision = [[<span class="built_in">UICollisionBehavior</span> alloc]initWithItems:@[<span class="keyword">self</span><span class="variable">.redView</span>, <span class="keyword">self</span><span class="variable">.sb</span>]];</span><br><span class="line">    <span class="comment">// 设置碰撞边界</span></span><br><span class="line">    collision<span class="variable">.translatesReferenceBoundsIntoBoundary</span> = <span class="literal">YES</span>;</span><br><span class="line">    <span class="comment">// 添加直线的边界</span></span><br><span class="line">    <span class="comment">// [collision addBoundaryWithIdentifier:@"ling" fromPoint:CGPointMake(0, 400) toPoint:CGPointMake(320, 500)];</span></span><br><span class="line">    <span class="comment">// 添加图形的边界</span></span><br><span class="line">    <span class="built_in">UIBezierPath</span> *path = [<span class="built_in">UIBezierPath</span> bezierPathWithOvalInRect:<span class="keyword">self</span><span class="variable">.view</span><span class="variable">.frame</span>];</span><br><span class="line">    [collision addBoundaryWithIdentifier:<span class="string">@"fd"</span> forPath:path];</span><br><span class="line">        </span><br><span class="line">    <span class="comment">// 3.将仿真行为添加到物理仿真器中</span></span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.dynamic</span> addBehavior:gravity];</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.dynamic</span> addBehavior:collision];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的代码redView就是随便拖得一个UIView,searchBar也是随意的一个控件,为了展示碰撞效果.其实还有好几种行为,大家可以自行学习一下,这方面的API还是比较容易看懂的.</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/OC/">OC</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/Others/">Others</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/11/05/UIDynamic仿真物理引擎/" data-title="UIDynamic仿真物理引擎 | 马占臣" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2015/11/05/呦！XMPP！/" title="呦！XMPP！">
+  <strong>上一篇：</strong><br/>
+  <span>
+  呦！XMPP！</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2015/09/02/总结一些SQL语句/"  title="总结一些SQL语句">
+ <strong>下一篇：</strong><br/> 
+ <span>总结一些SQL语句
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+ 
+ 
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分類</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/OC/" title="OC">OC<sup>10</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/Others/" title="Others">Others<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">標簽</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/数据库/" title="数据库">数据库<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/Others/" title="Others">Others<sup>3</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/设计模式/" title="设计模式">设计模式<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/第三方框架/" title="第三方框架">第三方框架<sup>2</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/手势/" title="手势">手势<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/数据解析/" title="数据解析">数据解析<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/即时通信/" title="即时通信">即时通信<sup>1</sup></a></li>
+			
+		
+			
+				<li><a href="/tags/others/" title="others">others<sup>1</sup></a></li>
+			
+		
+			
+		
+			
+		
+			
+		
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情鏈接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://henishuo.com" target="_blank" title="标哥的技术博客">标哥的技术博客</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Swilo. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/mazhanchen" target="_blank" class="icon-weibo" title="微博"></a>
+		
+		
+		<a href="https://github.com/swilo1122" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2016 
+		
+		<a href="/about" target="_blank" title="马占臣">马占臣</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+        getSize();
+        if (myWidth >= 1024) {
+          c.click();
+        }
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "//hm.baidu.com/hm.js?e6d1f421bbc9962127a50488f9ed37d1";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回頂部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>

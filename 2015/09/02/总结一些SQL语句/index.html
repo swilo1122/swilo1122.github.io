@@ -4,23 +4,26 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>iOS开发：修饰属性的那些关键字 | 马占臣</title>
+    <title>总结一些SQL语句 | 马占臣</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="马占臣">
     
 
     
-    <meta name="description" content="在Objective-C语言中，属性的定义都需要assign，copy，retain等修饰，在iOS5之后新加入了ARC（Automatic Reference Counting）自动引用计数机制，可以自动添加内存释放代码，大大解放了我们开发者的内存管理工作，其中又新加入了一些属性修饰的关键字strong, weak, unsafe_unretained，下面就来说一说这些关键字都是什么意思，而又">
+    <meta name="description" content="无论是使用SQLite3还是FMDB来进行数据存储，我们都需要使用SQL语句来对数据句进行操作。数据库是一门很深奥的技术，我们做移动端开发的暂时不往深了探究，总结一些我们平时用的比较多的SQL语句吧。
+简单地说SQLite数据库对应的就是一个文件（一般命名为xxx.db）。其中数据库的内部结构是以表（table）的形式呈现的。表是以行和列的形式组织起来的数据的集合。一个数据库包括一个或多个表。例如">
 <meta property="og:type" content="article">
-<meta property="og:title" content="iOS开发：修饰属性的那些关键字">
-<meta property="og:url" content="http://yoursite.com/2015/04/29/iOS开发：修饰属性的那些关键字/index.html">
+<meta property="og:title" content="总结一些SQL语句">
+<meta property="og:url" content="http://yoursite.com/2015/09/02/总结一些SQL语句/index.html">
 <meta property="og:site_name" content="马占臣">
-<meta property="og:description" content="在Objective-C语言中，属性的定义都需要assign，copy，retain等修饰，在iOS5之后新加入了ARC（Automatic Reference Counting）自动引用计数机制，可以自动添加内存释放代码，大大解放了我们开发者的内存管理工作，其中又新加入了一些属性修饰的关键字strong, weak, unsafe_unretained，下面就来说一说这些关键字都是什么意思，而又">
-<meta property="og:updated_time" content="2016-03-27T10:26:20.000Z">
+<meta property="og:description" content="无论是使用SQLite3还是FMDB来进行数据存储，我们都需要使用SQL语句来对数据句进行操作。数据库是一门很深奥的技术，我们做移动端开发的暂时不往深了探究，总结一些我们平时用的比较多的SQL语句吧。
+简单地说SQLite数据库对应的就是一个文件（一般命名为xxx.db）。其中数据库的内部结构是以表（table）的形式呈现的。表是以行和列的形式组织起来的数据的集合。一个数据库包括一个或多个表。例如">
+<meta property="og:updated_time" content="2016-04-10T19:15:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="iOS开发：修饰属性的那些关键字">
-<meta name="twitter:description" content="在Objective-C语言中，属性的定义都需要assign，copy，retain等修饰，在iOS5之后新加入了ARC（Automatic Reference Counting）自动引用计数机制，可以自动添加内存释放代码，大大解放了我们开发者的内存管理工作，其中又新加入了一些属性修饰的关键字strong, weak, unsafe_unretained，下面就来说一说这些关键字都是什么意思，而又">
+<meta name="twitter:title" content="总结一些SQL语句">
+<meta name="twitter:description" content="无论是使用SQLite3还是FMDB来进行数据存储，我们都需要使用SQL语句来对数据句进行操作。数据库是一门很深奥的技术，我们做移动端开发的暂时不往深了探究，总结一些我们平时用的比较多的SQL语句吧。
+简单地说SQLite数据库对应的就是一个文件（一般命名为xxx.db）。其中数据库的内部结构是以表（table）的形式呈现的。表是以行和列的形式组织起来的数据的集合。一个数据库包括一个或多个表。例如">
 
     
     <link rel="alternative" href="/atom.xml" title="马占臣" type="application/atom+xml">
@@ -80,77 +83,51 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/29/iOS开发：修饰属性的那些关键字/" title="iOS开发：修饰属性的那些关键字" itemprop="url">iOS开发：修饰属性的那些关键字</a>
+      <a href="/2015/09/02/总结一些SQL语句/" title="总结一些SQL语句" itemprop="url">总结一些SQL语句</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="马占臣" target="_blank" itemprop="author">马占臣</a>
 		
   <p class="article-time">
-    <time datetime="2015-04-29T13:44:58.000Z" itemprop="datePublished"> 發表於 2015-04-29</time>
+    <time datetime="2015-09-02T11:19:22.000Z" itemprop="datePublished"> 發表於 2015-09-02</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>在Objective-C语言中，属性的定义都需要assign，copy，retain等修饰，在iOS5之后新加入了ARC（Automatic Reference Counting）自动引用计数机制，可以自动添加内存释放代码，大大解放了我们开发者的内存管理工作，其中又新加入了一些属性修饰的关键字strong, weak, unsafe_unretained，下面就来说一说这些关键字都是什么意思，而又应该在什么时候使用。</p>
+		<p>无论是使用SQLite3还是FMDB来进行数据存储，我们都需要使用SQL语句来对数据句进行操作。数据库是一门很深奥的技术，我们做移动端开发的暂时不往深了探究，总结一些我们平时用的比较多的SQL语句吧。</p>
+<p>简单地说SQLite数据库对应的就是一个文件（一般命名为xxx.db）。其中数据库的内部结构是以表（table）的形式呈现的。表是以行和列的形式组织起来的数据的集合。一个数据库包括一个或多个表。例如，可能有一个有关学生信息的名为t_student的表。每列都包含特定类型的字段，如姓名。每行都包含有关学生的所有信息：姓名、性别，分数等等。在关系型数据库当中一个表就是一个关系，一个关系数据库可以包含多个表。列又称为属性或字段（column），行又称为记录（row，record）。</p>
+<p>SQL语句种类<br>DDL（数据定义）语句：创建表create table， 删除表drop table<br>DML（数据操作）语句：插入insert， 删除delete， 修改update<br>DQL（数据查询）语句：查询select， 条件：where、 order by、group by、having（这些关键字后面具体介绍）</p>
+<p>数据库SQL语句中不分大小写，但是我们习惯将关键字大写，我们定义的表明字段等小写，并且表名多以t_开头，语句以;结束。</p>
+<p>想要使用数据库，我们首先要建立一个表：</p>
+<p>CREATE TABLE IF NOT EXISTS 表名 (字段1 类型, 字段2 类型);</p>
+<p>此处注意IF NOT EXISTS关键字，加上这一行如果表名重复了不会出错，即：如果没有这个表，则创建，有这个表则什么都不做也不会出错。<br>一般表的结构在建表时要考虑清楚，后期修改相对麻烦一些。<br>删除表同理：</p>
+<p>DROP TABLE IF EXISTS 表名;</p>
+<p>修改表结构</p>
+<p>增加一个列：<br>ALTER TABLE 表名 ADD(列名 数据类型);<br>修改一个列的数据类型(一般限于修改长度，修改为一个不同类型时有诸多限制):<br>ALTER TABLE 表名 MODIFY(列名 数据类型);<br>修改列名：<br>ALTER TABLE 表名 RENAME COLUMN 当前列名 TO 新列名;<br>删除一个列：<br>ALTER TABLE 表名 DROP COLUMN 列名;<br>将一个表改名：<br>ALTER TABLE 当前表名 RENAME TO 新表名;</p>
+<p>向表中添加数据：</p>
+<p>INSERT INTO 表名(字段1, 字段2) VALUES (‘字段1的值’, ‘字段2的值’)   —（如果是字符串需要加’’）;</p>
+<p>修改表中数据：</p>
+<p>UPDATE 表名 SET 字段1 = 字段1的值, 字段2 = 字段2的值。。。;</p>
+<p>查询：</p>
+<p>SELECT 字段名, 字段名 FROM 表名;</p>
+<p>删除表中的数据：</p>
+<p>DELETE FROM 表名;</p>
+<p>其中查询或修改或删除表中的数据一般都带有条件：</p>
+<p>WHERE 字段名 条件 AND/OR 字段名 条件;<br>ORDER BY 字段名 DESC（降序，默认为升序）;<br>“Group By”从字面意义上理解就是根据“By”指定的规则对数据进行分组，所谓的分组就是将一个“数据集”划分成若干个“小区域”，然后针对若干个“小区域”进行数据处理。<br>GROUP BY 字段名;<br>HAVING 和WHERE都是用来筛选用的,HAVING 是筛选组,而WHERE是筛选记录.当分组筛选的时候 用HAVING,其它情况用WHERE;<br>用HAVING就一定要和GROUP BY连用，用GROUP BY不一用HAVING（它只是一个筛选条件用的）<br>HAVING 字段名 条件;</p>
+<p>LIMIT可以精确得控制查询结果的数量，LIMIT一般放在最后面<br>LIMIT 数值1, 数值2;<br>上条语句的意义为跳过数值1条数据，然后取数值2条数据<br>LIMIT 10 相当于 LIMIT 0, 10</p>
+<p>正常我们在创建表的时候还需要对字段添加一些约束来使数据库更容易修改和访问，也方便我们程序员之间的互相交流。<br>简单约束：<br>NOT NULL  表示字段的值不能为空<br>UNIQUE 规定字段的值必须唯一<br>DEFAULT 指定字段的默认值<br>PRIMARY KEY 主键（主键约束默认带有UNIQUE 和NOT NULL 约束） AUTOINCREMENT自动增长</p>
+<p>说说主键：<br>主键用来唯一地标识某一条记录，可以是一个字段或多个字段(注：①)<br>主键设计原则：</p>
 <blockquote>
-<ul>
-<li>assign</li>
-</ul>
+<p>主键应该是对用户没有意义的<br>永远也不要更新主键<br>主键不应包含动态变化的数据<br>主键应当由计算机自动生成<br>主键应该是INTEGER类型，这样的话我们也不同添加AUTOINCREMENT约束就自动增长了。</p>
 </blockquote>
-<p>assign:只会执行针对“纯量类型”（scalar type 例如C语言中int、float，OC中的CGFloat、NSInteger等）的简单赋值操作，其引用计数不会增加。</p>
-<p>为什么delegate使用assign修饰？<br>其实就是为了防止循环引用的问题。举个例子：如果A、B两个类互为对方的代理，而代理又是retain或者strong修饰的，那么在想要释放的时候就会由于互为代理而不能释放的循环引用问题，因此delegate需要使用assign修饰，而这也是相对老的用法，我们应该用ARC之后的weak来修饰delegate。</p>
-<blockquote>
-<ul>
-<li>copy</li>
-</ul>
-</blockquote>
-<p>copy:此类型所表达的所属关系与strong类似，但是其设置方法并不保留新值，而是将其拷贝。比如当属性类型为NSString *时，经常使用copy来保护其封装性，因为传递给setter方法的新值有可能指向一个NSMutableString类型的实例。它是NSString的子类，表示一种可以修改的字符串，此时若是补考呗字符串，那么设置完属性之后，字符串的值就可能会在对象不知情的情况下被人修改。所以，就需要拷贝一份不可变的字符串，确保对象的字符串值不会无意间变动。copy会导致对象的引用计数增加1。</p>
-<p>为什么block用copy修饰？<br>因为block默认是存放在栈中，如果不copy一份，随时可能被释放。<br>如果对象中包含一个block属性，而block中又引用了self，这就会导致循环引用，最终结果就是BAD ACCESS，解决办法就是用<strong>weak修饰self，如果是在MRC下，就用</strong>block修饰。</p>
-<blockquote>
-<ul>
-<li>retain</li>
-</ul>
-</blockquote>
-<p>retain:retain也会导致对象的引用计数加1，由于iOS5之后新增加了ARC，retain基本上已经被strong取代，极少使用。</p>
-<blockquote>
-<ul>
-<li>strong</li>
-</ul>
-</blockquote>
-<p>strong:这种特质表明该属性定义了一种“持有关系”，引用计数加1，为这种属性设置新值时，设置方法会先保留新值，并释放旧值，然后再将新值设置上去</p>
-<blockquote>
-<ul>
-<li>weak</li>
-</ul>
-</blockquote>
-<p>weak:这种类型正好与strong相反，表明了该属性定义了一种“非持有关系”。为这种属性设置新值时，设置方法既不保留新值，也不释放旧值。与assign类似，但是在属性所指的随行遭到摧毁时，属性值也会清空。引用计数不会增加。</p>
-<blockquote>
-<ul>
-<li>unsafe_unretained</li>
-</ul>
-</blockquote>
-<p>unsafe_unretained:这种特质和assign相同，但是它使用与“对象类型”，它表达一种“非持有关系”（“不保留” unretained），当目标对象遭到摧毁时，属性值不会自动清空（“不安全” unsafe），这一点与weak有区别</p>
-<blockquote>
-<ul>
-<li>atomic与nonatomic</li>
-</ul>
-</blockquote>
-<p>具备atomic特质的获取方法会通过锁定机制来确保其操作的原子性，也就是说，如果两个线程读写同一属性，那么不论何时总能看到有效的属性值。若使用nonatomic语义，那么当其中一个线程正在改写某些属性值时，另外一个线程也许会突然闯入，把尚未修改好的属性值读取出来。发生这种情况时，线程读取到的属性可能不对。<br>开发过iOS程序的就会发现，基本上所有的属性都声明为nonatomic。这样做的历史原因是：在iOS中使用同步锁的开销较大，这样会带来性能问题。一般情况下并不要求属性必须是“原子的”。因为这其实并不能保证“线程安全”，若要实现“线程安全”的操作，还需要采用更为深层的锁定机制才行。例如，一个线程在连续多次读取某属性值得过程中有别的线程在同时改写该值，那么即便将属性声明为atomic，也还是会读取到不同的属性值。因此，开发iOS程序时一般都会使用nonatomic属性。但是在开发Mac OS X程序时，使用atomic属性通常就不会有性能瓶颈了。</p>
-<blockquote>
-<ul>
-<li>readwrite与readnoly</li>
-</ul>
-</blockquote>
-<p>具备readwrite特质的属性拥有setter和getter方法，默认编译器会自动生成这两个方法。<br>如果是readonly（只读）的属性，则仅拥有getter方法，编译器不会为其自动生成setter方法。</p>
-<blockquote>
-<ul>
-<li>其他</li>
-</ul>
-</blockquote>
-<p>getter=<name>:指定“获取方法”的方法名。如果某属性是BOOL类型，而你想为其获取方法加上”is”前缀，那么久可以用这个办法来指定。<br>setter=<name>:指定“设置方法”的方法名，此种用法不太常见，并且ARC也不支持此种语义特性。</name></name></p>
-<p>参考资料：《Effective Objective-C 2.0 编写高质量iOS和OS X代码的52个有效方法》</p>
+<p>外键约束：利用外键约束来表示表与表之间的关系，一般情况是一个表的某个字段引用着另一张表的主键字段。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">"t_student"</span> (</span><br><span class="line">	 <span class="string">"id"</span> <span class="built_in">INTEGER</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	 <span class="string">"name"</span> <span class="built_in">text</span>,</span><br><span class="line">	 <span class="string">"class"</span> <span class="built_in">integer</span>,</span><br><span class="line">	PRIMARY <span class="keyword">KEY</span>(<span class="string">"id"</span>),</span><br><span class="line">	<span class="keyword">CONSTRAINT</span> <span class="string">"fk_student_ref_class"</span> FOREIGN <span class="keyword">KEY</span> (<span class="string">"class"</span>) <span class="keyword">REFERENCES</span> <span class="string">"t_class"</span> (<span class="string">"id"</span>)</span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>
+<p>上面这条语句意义为创建一个t_student的表，字段有id，姓名，班级作为外键存在，此外键引用了t_class表的id字段作为值。</p>
+<p>当两张表建立关系之后，想查询具体数据就需要使用多表连接查询。<br>进行表连接查询的时候只要分析一个等同的条件，并使用WHERE关键字进行条件查询，即可查询到想要的数据，比如t_class表和t_student表中，想查询学生，需要的条件就是学生的class = class的id。<br>另：多表连接嵌套查询的时候，可以使用AS关键字对表起别名来使语句更简洁易懂。</p>
+<p>最后，其实这些SQL语句也不用必须背下来，懒人创造世界，我们也可以使用Nacicat，PLSQL等软件生成我们想要使用的语句，但是多记一些学一些东西总是好的，不是么？</p>
+<p>注释①：主键如果是多个字段成为复合主键，需要注意的是复合主键并不是字段1作为主键的同时字段2也为主键，而是将字段1和字段2联合起来作为一个主键。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -158,13 +135,13 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/OC/">OC</a>
+  <a class="article-category-link" href="/categories/Others/">Others</a>
 </div>
 
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/others/">others</a>
+  <span></span> <a href="/tags/数据库/">数据库</a>
   </div>
 
 </div>
@@ -173,7 +150,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/04/29/iOS开发：修饰属性的那些关键字/" data-title="iOS开发：修饰属性的那些关键字 | 马占臣" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2015/09/02/总结一些SQL语句/" data-title="总结一些SQL语句 | 马占臣" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -187,18 +164,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/05/25/给你的APP添加手势/" title="给你的APP添加手势">
+ <a href="/2015/11/05/UIDynamic仿真物理引擎/" title="UIDynamic仿真物理引擎">
   <strong>上一篇：</strong><br/>
   <span>
-  给你的APP添加手势</span>
+  UIDynamic仿真物理引擎</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/04/02/给UIView写一个category/"  title="给UIView写一个category">
+<a href="/2015/08/28/FMDB的使用/"  title="FMDB的使用">
  <strong>下一篇：</strong><br/> 
- <span>给UIView写一个category
+ <span>FMDB的使用
 </span>
 </a>
 </div>

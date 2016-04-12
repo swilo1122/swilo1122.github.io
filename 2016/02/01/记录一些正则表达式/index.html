@@ -4,26 +4,29 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>总结一些SQL语句 | 马占臣</title>
+    <title>记录一些正则表达式 | 马占臣</title>
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
     
     <meta name="author" content="马占臣">
     
 
     
-    <meta name="description" content="无论是使用SQLite3还是FMDB来进行数据存储，我们都需要使用SQL语句来对数据句进行操作。数据库是一门很深奥的技术，我们做移动端开发的暂时不往深了探究，总结一些我们平时用的比较多的SQL语句吧。
-简单地说SQLite数据库对应的就是一个文件（一般命名为xxx.db）。其中数据库的内部结构是以表（table）的形式呈现的。表是以行和列的形式组织起来的数据的集合。一个数据库包括一个或多个表。例如">
+    <meta name="description" content="正则表达式，又称正规表示法、常规表示法（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。
+在iOS开发中的使用常见的就是判断用户名和密码的合法性了,为了以后想使用的时候方便一些,记录下来一个表格,常见的正则表达式都在里面了.
+说明：正则表达式通常用于两种任务：1.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="总结一些SQL语句">
-<meta property="og:url" content="http://yoursite.com/2015/09/02/总结一些SQL语句/index.html">
+<meta property="og:title" content="记录一些正则表达式">
+<meta property="og:url" content="http://yoursite.com/2016/02/01/记录一些正则表达式/index.html">
 <meta property="og:site_name" content="马占臣">
-<meta property="og:description" content="无论是使用SQLite3还是FMDB来进行数据存储，我们都需要使用SQL语句来对数据句进行操作。数据库是一门很深奥的技术，我们做移动端开发的暂时不往深了探究，总结一些我们平时用的比较多的SQL语句吧。
-简单地说SQLite数据库对应的就是一个文件（一般命名为xxx.db）。其中数据库的内部结构是以表（table）的形式呈现的。表是以行和列的形式组织起来的数据的集合。一个数据库包括一个或多个表。例如">
-<meta property="og:updated_time" content="2016-04-10T19:15:00.000Z">
+<meta property="og:description" content="正则表达式，又称正规表示法、常规表示法（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。
+在iOS开发中的使用常见的就是判断用户名和密码的合法性了,为了以后想使用的时候方便一些,记录下来一个表格,常见的正则表达式都在里面了.
+说明：正则表达式通常用于两种任务：1.">
+<meta property="og:updated_time" content="2016-04-12T14:57:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="总结一些SQL语句">
-<meta name="twitter:description" content="无论是使用SQLite3还是FMDB来进行数据存储，我们都需要使用SQL语句来对数据句进行操作。数据库是一门很深奥的技术，我们做移动端开发的暂时不往深了探究，总结一些我们平时用的比较多的SQL语句吧。
-简单地说SQLite数据库对应的就是一个文件（一般命名为xxx.db）。其中数据库的内部结构是以表（table）的形式呈现的。表是以行和列的形式组织起来的数据的集合。一个数据库包括一个或多个表。例如">
+<meta name="twitter:title" content="记录一些正则表达式">
+<meta name="twitter:description" content="正则表达式，又称正规表示法、常规表示法（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。
+在iOS开发中的使用常见的就是判断用户名和密码的合法性了,为了以后想使用的时候方便一些,记录下来一个表格,常见的正则表达式都在里面了.
+说明：正则表达式通常用于两种任务：1.">
 
     
     <link rel="alternative" href="/atom.xml" title="马占臣" type="application/atom+xml">
@@ -83,51 +86,135 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/09/02/总结一些SQL语句/" title="总结一些SQL语句" itemprop="url">总结一些SQL语句</a>
+      <a href="/2016/02/01/记录一些正则表达式/" title="记录一些正则表达式" itemprop="url">记录一些正则表达式</a>
   </h1>
   <p class="article-author">By
        
 		<a href="/about" title="马占臣" target="_blank" itemprop="author">马占臣</a>
 		
   <p class="article-time">
-    <time datetime="2015-09-02T11:19:22.000Z" itemprop="datePublished"> 發表於 2015-09-02</time>
+    <time datetime="2016-02-01T13:16:28.000Z" itemprop="datePublished"> 發表於 2016-02-01</time>
     
   </p>
 </header>
 	<div class="article-content">
 		
-		<p>无论是使用SQLite3还是FMDB来进行数据存储，我们都需要使用SQL语句来对数据句进行操作。数据库是一门很深奥的技术，我们做移动端开发的暂时不往深了探究，总结一些我们平时用的比较多的SQL语句吧。</p>
-<p>简单地说SQLite数据库对应的就是一个文件（一般命名为xxx.db）。其中数据库的内部结构是以表（table）的形式呈现的。表是以行和列的形式组织起来的数据的集合。一个数据库包括一个或多个表。例如，可能有一个有关学生信息的名为t_student的表。每列都包含特定类型的字段，如姓名。每行都包含有关学生的所有信息：姓名、性别，分数等等。在关系型数据库当中一个表就是一个关系，一个关系数据库可以包含多个表。列又称为属性或字段（column），行又称为记录（row，record）。</p>
-<p>SQL语句种类<br>DDL（数据定义）语句：创建表create table， 删除表drop table<br>DML（数据操作）语句：插入insert， 删除delete， 修改update<br>DQL（数据查询）语句：查询select， 条件：where、 order by、group by、having（这些关键字后面具体介绍）</p>
-<p>数据库SQL语句中不分大小写，但是我们习惯将关键字大写，我们定义的表明字段等小写，并且表名多以t_开头，语句以;结束。</p>
-<p>想要使用数据库，我们首先要建立一个表：</p>
-<p>CREATE TABLE IF NOT EXISTS 表名 (字段1 类型, 字段2 类型);</p>
-<p>此处注意IF NOT EXISTS关键字，加上这一行如果表名重复了不会出错，即：如果没有这个表，则创建，有这个表则什么都不做也不会出错。<br>一般表的结构在建表时要考虑清楚，后期修改相对麻烦一些。<br>删除表同理：</p>
-<p>DROP TABLE IF EXISTS 表名;</p>
-<p>修改表结构</p>
-<p>增加一个列：<br>ALTER TABLE 表名 ADD(列名 数据类型);<br>修改一个列的数据类型(一般限于修改长度，修改为一个不同类型时有诸多限制):<br>ALTER TABLE 表名 MODIFY(列名 数据类型);<br>修改列名：<br>ALTER TABLE 表名 RENAME COLUMN 当前列名 TO 新列名;<br>删除一个列：<br>ALTER TABLE 表名 DROP COLUMN 列名;<br>将一个表改名：<br>ALTER TABLE 当前表名 RENAME TO 新表名;</p>
-<p>向表中添加数据：</p>
-<p>INSERT INTO 表名(字段1, 字段2) VALUES (‘字段1的值’, ‘字段2的值’)   —（如果是字符串需要加’’）;</p>
-<p>修改表中数据：</p>
-<p>UPDATE 表名 SET 字段1 = 字段1的值, 字段2 = 字段2的值。。。;</p>
-<p>查询：</p>
-<p>SELECT 字段名, 字段名 FROM 表名;</p>
-<p>删除表中的数据：</p>
-<p>DELETE FROM 表名;</p>
-<p>其中查询或修改或删除表中的数据一般都带有条件：</p>
-<p>WHERE 字段名 条件 AND/OR 字段名 条件;<br>ORDER BY 字段名 DESC（降序，默认为升序）;<br>“Group By”从字面意义上理解就是根据“By”指定的规则对数据进行分组，所谓的分组就是将一个“数据集”划分成若干个“小区域”，然后针对若干个“小区域”进行数据处理。<br>GROUP BY 字段名;<br>HAVING 和WHERE都是用来筛选用的,HAVING 是筛选组,而WHERE是筛选记录.当分组筛选的时候 用HAVING,其它情况用WHERE;<br>用HAVING就一定要和GROUP BY连用，用GROUP BY不一用HAVING（它只是一个筛选条件用的）<br>HAVING 字段名 条件;</p>
-<p>LIMIT可以精确得控制查询结果的数量，LIMIT一般放在最后面<br>LIMIT 数值1, 数值2;<br>上条语句的意义为跳过数值1条数据，然后取数值2条数据<br>LIMIT 10 相当于 LIMIT 0, 10</p>
-<p>正常我们在创建表的时候还需要对字段添加一些约束来使数据库更容易修改和访问，也方便我们程序员之间的互相交流。<br>简单约束：<br>NOT NULL  表示字段的值不能为空<br>UNIQUE 规定字段的值必须唯一<br>DEFAULT 指定字段的默认值<br>PRIMARY KEY 主键（主键约束默认带有UNIQUE 和NOT NULL 约束） AUTOINCREMENT自动增长</p>
-<p>说说主键：<br>主键用来唯一地标识某一条记录，可以是一个字段或多个字段(注：①)<br>主键设计原则：</p>
-<blockquote>
-<p>主键应该是对用户没有意义的<br>永远也不要更新主键<br>主键不应包含动态变化的数据<br>主键应当由计算机自动生成<br>主键应该是INTEGER类型，这样的话我们也不同添加AUTOINCREMENT约束就自动增长了。</p>
-</blockquote>
-<p>外键约束：利用外键约束来表示表与表之间的关系，一般情况是一个表的某个字段引用着另一张表的主键字段。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">"t_student"</span> (</span><br><span class="line">	 <span class="string">"id"</span> <span class="built_in">INTEGER</span> <span class="keyword">NOT</span> <span class="literal">NULL</span>,</span><br><span class="line">	 <span class="string">"name"</span> <span class="built_in">text</span>,</span><br><span class="line">	 <span class="string">"class"</span> <span class="built_in">integer</span>,</span><br><span class="line">	PRIMARY <span class="keyword">KEY</span>(<span class="string">"id"</span>),</span><br><span class="line">	<span class="keyword">CONSTRAINT</span> <span class="string">"fk_student_ref_class"</span> FOREIGN <span class="keyword">KEY</span> (<span class="string">"class"</span>) <span class="keyword">REFERENCES</span> <span class="string">"t_class"</span> (<span class="string">"id"</span>)</span><br><span class="line">)</span></span><br></pre></td></tr></table></figure>
-<p>上面这条语句意义为创建一个t_student的表，字段有id，姓名，班级作为外键存在，此外键引用了t_class表的id字段作为值。</p>
-<p>当两张表建立关系之后，想查询具体数据就需要使用多表连接查询。<br>进行表连接查询的时候只要分析一个等同的条件，并使用WHERE关键字进行条件查询，即可查询到想要的数据，比如t_class表和t_student表中，想查询学生，需要的条件就是学生的class = class的id。<br>另：多表连接嵌套查询的时候，可以使用AS关键字对表起别名来使语句更简洁易懂。</p>
-<p>最后，其实这些SQL语句也不用必须背下来，懒人创造世界，我们也可以使用Nacicat，PLSQL等软件生成我们想要使用的语句，但是多记一些学一些东西总是好的，不是么？</p>
-<p>注释①：主键如果是多个字段成为复合主键，需要注意的是复合主键并不是字段1作为主键的同时字段2也为主键，而是将字段1和字段2联合起来作为一个主键。</p>
+		<p>正则表达式，又称正规表示法、常规表示法（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。</p>
+<p>在iOS开发中的使用常见的就是判断用户名和密码的合法性了,为了以后想使用的时候方便一些,记录下来一个表格,常见的正则表达式都在里面了.</p>
+<p>说明：正则表达式通常用于两种任务：1.验证，2.搜索/替换。用于验证时，通常需要在前后分别加上^和$，以匹配整个待验证字符串；搜索/替换时是否加上此限定则根据搜索的要求而定，此外，也有可能要在前后加上\b而不是^和$。此表所列的常用正则表达式，除个别外均未在前后加上任何限定，请根据需要，自行处理。</p>
+<table>
+<thead>
+<tr>
+<th>说明</th>
+<th style="text-align:center">正则表达式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>网址（URL）</td>
+<td style="text-align:center">[a-zA-z]+://[^\s]*</td>
+</tr>
+<tr>
+<td>IP地址(IP Address)</td>
+<td style="text-align:center">((2[0-4]\d</td>
+<td>25[0-5]</td>
+<td>[01]?\d\d?).){3}(2[0-4]\d</td>
+<td>25[0-5]</td>
+<td>[01]?\d\d?)</td>
+</tr>
+<tr>
+<td>电子邮件(Email)</td>
+<td style="text-align:center">\w+([-+.]\w+)<em>@\w+([-.]\w+)</em>.\w+([-.]\w+)*</td>
+</tr>
+<tr>
+<td>QQ号码</td>
+<td style="text-align:center">[1-9]\d{4,}</td>
+</tr>
+<tr>
+<td>HTML标记(包含内容或自闭合)</td>
+<td style="text-align:center">&lt;(.<em>)(.</em>)&gt;.*&lt;\/\1&gt;</td>
+<td>&lt;(.*) \/&gt;</td>
+</tr>
+<tr>
+<td>密码(由数字/大写字母/小写字母/标点符号组成，四种都必有，8位以上)</td>
+<td style="text-align:center">(?=^.{8,}$)(?=.<em>\d)(?=.</em>\W+)(?=.<em>[A-Z])(?=.</em>[a-z])(?!.<em>\n).</em>$</td>
+</tr>
+<tr>
+<td>日期(年-月-日)</td>
+<td style="text-align:center">(\d{4}</td>
+<td>\d{2})-((1[0-2])</td>
+<td>(0?[1-9]))-(([12][0-9])</td>
+<td>(3[01])</td>
+<td>(0?[1-9]))</td>
+</tr>
+<tr>
+<td>日期(月/日/年)</td>
+<td style="text-align:center">((1[0-2])</td>
+<td>(0?[1-9]))/(([12][0-9])</td>
+<td>(3[01])</td>
+<td>(0?[1-9]))/(\d{4}</td>
+<td>\d{2})</td>
+</tr>
+<tr>
+<td>时间(小时:分钟, 24小时制)</td>
+<td style="text-align:center">((1</td>
+<td>0?)[0-9]</td>
+<td>2[0-3]):([0-5][0-9])</td>
+</tr>
+<tr>
+<td>汉字(字符)</td>
+<td style="text-align:center">[\u4e00-\u9fa5]</td>
+</tr>
+<tr>
+<td>中文及全角标点符号(字符)</td>
+<td style="text-align:center">[\u3000-\u301e\ufe10-\ufe19\ufe30-\ufe44\ufe50-\ufe6b\uff01-\uffee]</td>
+</tr>
+<tr>
+<td>中国大陆固定电话号码</td>
+<td style="text-align:center">(\d{4}-</td>
+<td>\d{3}-)?(\d{8}</td>
+<td>\d{7})</td>
+</tr>
+<tr>
+<td>中国大陆手机号码</td>
+<td style="text-align:center">1\d{10}</td>
+</tr>
+<tr>
+<td>中国大陆邮政编码</td>
+<td style="text-align:center">[1-9]\d{5}</td>
+</tr>
+<tr>
+<td>中国大陆身份证号(15位或18位)</td>
+<td style="text-align:center">\d{15}(\d\d[0-9xX])?</td>
+</tr>
+<tr>
+<td>非负整数(正整数或零)</td>
+<td style="text-align:center">\d+</td>
+</tr>
+<tr>
+<td>正整数</td>
+<td style="text-align:center">[0-9]<em>[1-9][0-9]</em></td>
+</tr>
+<tr>
+<td>负整数</td>
+<td style="text-align:center">-[0-9]<em>[1-9][0-9]</em></td>
+</tr>
+<tr>
+<td>整数</td>
+<td style="text-align:center">-?\d+</td>
+</tr>
+<tr>
+<td>小数</td>
+<td style="text-align:center">(-?\d+)(.\d+)?</td>
+</tr>
+<tr>
+<td>不包含abc的单词</td>
+<td style="text-align:center">\b((?!abc)\w)+\b</td>
+</tr>
+</tbody>
+</table>
+<p>不得不说,使用markDown语法编辑表格真心费劲,下面上一段简单的小代码,看看正则表达式怎么用:</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *patternForName = <span class="string">@"^[A-Za-z]&#123;4,8&#125;$"</span>;</span><br><span class="line"><span class="built_in">NSPredicate</span> *predForName = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"SELF MATCHES %@"</span>, patternForName];</span><br><span class="line"><span class="comment">// 如果返回值为真,则代表所判断的字符串合法(符合你设定的规则)</span></span><br><span class="line"><span class="built_in">BOOL</span> checkName = [predForName evaluateWithObject:text];</span><br></pre></td></tr></table></figure>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -141,7 +228,7 @@
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/数据库/">数据库</a>
+  <span></span> <a href="/tags/Others/">Others</a>
   </div>
 
 </div>
@@ -150,7 +237,7 @@
 
 	<div class="article-share" id="share">
 	
-	  <div data-url="http://yoursite.com/2015/09/02/总结一些SQL语句/" data-title="总结一些SQL语句 | 马占臣" data-tsina="null" class="share clearfix">
+	  <div data-url="http://yoursite.com/2016/02/01/记录一些正则表达式/" data-title="记录一些正则表达式 | 马占臣" data-tsina="null" class="share clearfix">
 	  </div>
 	
 	</div>
@@ -163,19 +250,11 @@
 	
 <nav class="article-nav clearfix">
  
- <div class="prev" >
- <a href="/2015/11/05/UIDynamic仿真物理引擎/" title="UIDynamic仿真物理引擎">
-  <strong>上一篇：</strong><br/>
-  <span>
-  UIDynamic仿真物理引擎</span>
-</a>
-</div>
-
 
 <div class="next">
-<a href="/2015/08/28/FMDB的使用/"  title="FMDB的使用">
+<a href="/2016/01/05/学习一些简单的算法/"  title="学习一些简单的算法">
  <strong>下一篇：</strong><br/> 
- <span>FMDB的使用
+ <span>学习一些简单的算法
 </span>
 </a>
 </div>

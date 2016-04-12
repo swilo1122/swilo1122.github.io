@@ -21,7 +21,7 @@
 <meta property="og:description" content="正则表达式，又称正规表示法、常规表示法（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。
 在iOS开发中的使用常见的就是判断用户名和密码的合法性了,为了以后想使用的时候方便一些,记录下来一个表格,常见的正则表达式都在里面了.
 说明：正则表达式通常用于两种任务：1.">
-<meta property="og:updated_time" content="2016-04-12T14:57:18.000Z">
+<meta property="og:updated_time" content="2016-04-12T15:11:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记录一些正则表达式">
 <meta name="twitter:description" content="正则表达式，又称正规表示法、常规表示法（英语：Regular Expression，在代码中常简写为regex、regexp或RE），计算机科学的一个概念。正则表达式使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。
@@ -105,17 +105,17 @@
 <table>
 <thead>
 <tr>
-<th>说明</th>
+<th style="text-align:center">说明</th>
 <th style="text-align:center">正则表达式</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>网址（URL）</td>
+<td style="text-align:center">网址（URL）</td>
 <td style="text-align:center">[a-zA-z]+://[^\s]*</td>
 </tr>
 <tr>
-<td>IP地址(IP Address)</td>
+<td style="text-align:center">IP地址(IP Address)</td>
 <td style="text-align:center">((2[0-4]\d</td>
 <td>25[0-5]</td>
 <td>[01]?\d\d?).){3}(2[0-4]\d</td>
@@ -123,98 +123,71 @@
 <td>[01]?\d\d?)</td>
 </tr>
 <tr>
-<td>电子邮件(Email)</td>
+<td style="text-align:center">电子邮件(Email)</td>
 <td style="text-align:center">\w+([-+.]\w+)<em>@\w+([-.]\w+)</em>.\w+([-.]\w+)*</td>
 </tr>
 <tr>
-<td>QQ号码</td>
+<td style="text-align:center">QQ号码</td>
 <td style="text-align:center">[1-9]\d{4,}</td>
 </tr>
 <tr>
-<td>HTML标记(包含内容或自闭合)</td>
+<td style="text-align:center">HTML标记(包含内容或自闭合)</td>
 <td style="text-align:center">&lt;(.<em>)(.</em>)&gt;.*&lt;\/\1&gt;</td>
 <td>&lt;(.*) \/&gt;</td>
 </tr>
 <tr>
-<td>密码(由数字/大写字母/小写字母/标点符号组成，四种都必有，8位以上)</td>
+<td style="text-align:center">密码(由数字/大写字母/小写字母/标点符号组成，四种都必有，8位以上)</td>
 <td style="text-align:center">(?=^.{8,}$)(?=.<em>\d)(?=.</em>\W+)(?=.<em>[A-Z])(?=.</em>[a-z])(?!.<em>\n).</em>$</td>
 </tr>
 <tr>
-<td>日期(年-月-日)</td>
-<td style="text-align:center">(\d{4}</td>
-<td>\d{2})-((1[0-2])</td>
-<td>(0?[1-9]))-(([12][0-9])</td>
-<td>(3[01])</td>
-<td>(0?[1-9]))</td>
-</tr>
-<tr>
-<td>日期(月/日/年)</td>
-<td style="text-align:center">((1[0-2])</td>
-<td>(0?[1-9]))/(([12][0-9])</td>
-<td>(3[01])</td>
-<td>(0?[1-9]))/(\d{4}</td>
-<td>\d{2})</td>
-</tr>
-<tr>
-<td>时间(小时:分钟, 24小时制)</td>
-<td style="text-align:center">((1</td>
-<td>0?)[0-9]</td>
-<td>2[0-3]):([0-5][0-9])</td>
-</tr>
-<tr>
-<td>汉字(字符)</td>
+<td style="text-align:center">汉字(字符)</td>
 <td style="text-align:center">[\u4e00-\u9fa5]</td>
 </tr>
 <tr>
-<td>中文及全角标点符号(字符)</td>
+<td style="text-align:center">中文及全角标点符号(字符)</td>
 <td style="text-align:center">[\u3000-\u301e\ufe10-\ufe19\ufe30-\ufe44\ufe50-\ufe6b\uff01-\uffee]</td>
 </tr>
 <tr>
-<td>中国大陆固定电话号码</td>
-<td style="text-align:center">(\d{4}-</td>
-<td>\d{3}-)?(\d{8}</td>
-<td>\d{7})</td>
-</tr>
-<tr>
-<td>中国大陆手机号码</td>
+<td style="text-align:center">中国大陆手机号码</td>
 <td style="text-align:center">1\d{10}</td>
 </tr>
 <tr>
-<td>中国大陆邮政编码</td>
+<td style="text-align:center">中国大陆邮政编码</td>
 <td style="text-align:center">[1-9]\d{5}</td>
 </tr>
 <tr>
-<td>中国大陆身份证号(15位或18位)</td>
+<td style="text-align:center">中国大陆身份证号(15位或18位)</td>
 <td style="text-align:center">\d{15}(\d\d[0-9xX])?</td>
 </tr>
 <tr>
-<td>非负整数(正整数或零)</td>
+<td style="text-align:center">非负整数(正整数或零)</td>
 <td style="text-align:center">\d+</td>
 </tr>
 <tr>
-<td>正整数</td>
+<td style="text-align:center">正整数</td>
 <td style="text-align:center">[0-9]<em>[1-9][0-9]</em></td>
 </tr>
 <tr>
-<td>负整数</td>
+<td style="text-align:center">负整数</td>
 <td style="text-align:center">-[0-9]<em>[1-9][0-9]</em></td>
 </tr>
 <tr>
-<td>整数</td>
+<td style="text-align:center">整数</td>
 <td style="text-align:center">-?\d+</td>
 </tr>
 <tr>
-<td>小数</td>
+<td style="text-align:center">小数</td>
 <td style="text-align:center">(-?\d+)(.\d+)?</td>
 </tr>
 <tr>
-<td>不包含abc的单词</td>
+<td style="text-align:center">不包含abc的单词</td>
 <td style="text-align:center">\b((?!abc)\w)+\b</td>
 </tr>
 </tbody>
 </table>
 <p>不得不说,使用markDown语法编辑表格真心费劲,下面上一段简单的小代码,看看正则表达式怎么用:</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSString</span> *patternForName = <span class="string">@"^[A-Za-z]&#123;4,8&#125;$"</span>;</span><br><span class="line"><span class="built_in">NSPredicate</span> *predForName = [<span class="built_in">NSPredicate</span> predicateWithFormat:<span class="string">@"SELF MATCHES %@"</span>, patternForName];</span><br><span class="line"><span class="comment">// 如果返回值为真,则代表所判断的字符串合法(符合你设定的规则)</span></span><br><span class="line"><span class="built_in">BOOL</span> checkName = [predForName evaluateWithObject:text];</span><br></pre></td></tr></table></figure>
+<p>参考:<a href="http://deerchao.net/tutorials/regex/common.htm" target="_blank" rel="external">正则表达式</a></p>
   
 	</div>
 		<footer class="article-footer clearfix">

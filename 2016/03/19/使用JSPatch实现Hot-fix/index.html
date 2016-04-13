@@ -18,7 +18,7 @@
 <meta property="og:site_name" content="马占臣">
 <meta property="og:description" content="大家是否有过这样的经历：新版本上线后发现有个严重的 bug，可能会导致 crash 率激增，可能会使网络请求无法发出，这时能做的只是赶紧修复 bug 然后提交等待漫长的 AppStore 审核，再盼望用户快点升级，付出巨大的人力和时间成本，才能完成此次 bug 的修复。使用 JSPatch 可以解决这样的问题，只需在项目中引入 JSPatch，就可以在发现 bug 时下发 JS 脚本补丁，替换原生">
 <meta property="og:image" content="http://ww3.sinaimg.cn/large/78cf69bdjw1f2v4at944pj20gq05o0t0.jpg">
-<meta property="og:updated_time" content="2016-04-13T07:48:04.000Z">
+<meta property="og:updated_time" content="2016-04-13T08:58:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用JSPatch实现Hot-fix">
 <meta name="twitter:description" content="大家是否有过这样的经历：新版本上线后发现有个严重的 bug，可能会导致 crash 率激增，可能会使网络请求无法发出，这时能做的只是赶紧修复 bug 然后提交等待漫长的 AppStore 审核，再盼望用户快点升级，付出巨大的人力和时间成本，才能完成此次 bug 的修复。使用 JSPatch 可以解决这样的问题，只需在项目中引入 JSPatch，就可以在发现 bug 时下发 JS 脚本补丁，替换原生">
@@ -95,30 +95,24 @@
 	<div class="article-content">
 		
 		<p>大家是否有过这样的经历：新版本上线后发现有个严重的 bug，可能会导致 crash 率激增，可能会使网络请求无法发出，这时能做的只是赶紧修复 bug 然后提交等待漫长的 AppStore 审核，再盼望用户快点升级，付出巨大的人力和时间成本，才能完成此次 bug 的修复。<br>使用 JSPatch 可以解决这样的问题，只需在项目中引入 JSPatch，就可以在发现 bug 时下发 JS 脚本补丁，替换原生方法，无需更新 APP 即时修复 bug。</p>
-<p>####原理</p>
-<p>JSPatch 用 iOS 内置的 JavaScriptCore.framework 作为 JS 引擎，但没有用它 JSExport 的特性进行 JS-OC 函数互调，而是通过 Objective-C Runtime，从 JS 传递要调用的类名函数名到 Objective-C，再使用 NSInvocation 动态调用对应的 OC 方法。</p>
-<p>####使用范例</p>
-<p>JSPatch 可以替换线上原生代码，达到实时修复 bug 的目的，接下来举个例子说明若要经过 JSPatch 平台下发 JS 脚本修复 bug，需要进行哪些步骤。</p>
+<h4 id="u539F_u7406"><a href="#u539F_u7406" class="headerlink" title="原理"></a>原理</h4><p>JSPatch 用 iOS 内置的 JavaScriptCore.framework 作为 JS 引擎，但没有用它 JSExport 的特性进行 JS-OC 函数互调，而是通过 Objective-C Runtime，从 JS 传递要调用的类名函数名到 Objective-C，再使用 NSInvocation 动态调用对应的 OC 方法。</p>
+<h4 id="u4F7F_u7528_u8303_u4F8B"><a href="#u4F7F_u7528_u8303_u4F8B" class="headerlink" title="使用范例"></a>使用范例</h4><p>JSPatch 可以替换线上原生代码，达到实时修复 bug 的目的，接下来举个例子说明若要经过 JSPatch 平台下发 JS 脚本修复 bug，需要进行哪些步骤。</p>
 <p>首先项目必须接入 <a href="http://jspatch.com/Docs/SDK" target="_blank" rel="external">JSPatch SDK</a>，并关联 AppKey，线上版本必须带有这个 SDK。</p>
 <p>假设已接入 JSPatch SDK 的某线上 APP 发现一处代码有 bug 导致 crash：</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">XRTableViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)tableView:(<span class="built_in">UITableView</span> *)tableView didSelectRowAtIndexPath:(<span class="built_in">NSIndexPath</span> *)indexPath</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">NSString</span> *content = <span class="keyword">self</span><span class="variable">.dataSource</span>[[indexPath row]]; <span class="comment">//可能会超出数组范围导致crash</span></span><br><span class="line">  XRViewController *controller = [[JPViewController alloc] initWithContent:content];</span><br><span class="line">  [<span class="keyword">self</span><span class="variable">.navigationController</span> pushViewController:controller];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 <p>上述代码中取数组元素处可能会超出数组范围导致 crash，对此我们写了如下 JS 脚本准备替换上述方法修复这个 bug：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//main.js</span></span><br><span class="line">defineClass(<span class="string">"XRTableViewController"</span>, &#123;</span><br><span class="line">  tableView_didSelectRowAtIndexPath: <span class="function"><span class="keyword">function</span><span class="params">(tableView, indexPath)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> row = indexPath.row()</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>.dataSource().length &gt; row) &#123;  <span class="comment">//加上判断越界的逻辑</span></span><br><span class="line">      <span class="keyword">var</span> content = <span class="keyword">self</span>.dataArr()[row];</span><br><span class="line">      <span class="keyword">var</span> controller = XRViewController.alloc().initWithContent(content);</span><br><span class="line">      <span class="keyword">self</span>.navigationController().pushViewController(controller);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 <p>注意在 JSPatch 平台的规范里，JS脚本的文件名必须是 main.js。接下来就看如何把这个 JS 脚本下发给所有用户。</p>
-<p>####测试</p>
-<p>在上线之前需要对脚本进行本地测试，看看运行是否正常。SDK 提供了方法 <strong>+testScriptInBundle</strong> 用于发布前的测试：</p>
+<h4 id="u6D4B_u8BD5"><a href="#u6D4B_u8BD5" class="headerlink" title="测试"></a>测试</h4><p>在上线之前需要对脚本进行本地测试，看看运行是否正常。SDK 提供了方法 <strong>+testScriptInBundle</strong> 用于发布前的测试：</p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;JSPatch/JSPatch.h&gt;</span></span></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">AppDelegate</span></span></span><br><span class="line">- (<span class="built_in">BOOL</span>)application:(<span class="built_in">UIApplication</span> *)application didFinishLaunchingWithOptions:(<span class="built_in">NSDictionary</span> *)launchOptions &#123;</span><br><span class="line">    [JSPatch testScriptInBundle];</span><br><span class="line">    ….</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
 <p>调用这个方法后，JSPatch 会在当前项目的 bundle 里寻找 main.js 文件执行，效果与最终线上用户下载脚本执行一样，测试完后就可以准备上线这个脚本。</p>
 <p>注意 <strong>+testScriptInBundle</strong> 不能与 <strong>+startWithAppKey:</strong> 一起调用，<strong>+testScriptInBundle</strong> 只用于本地测试，测试完毕后需要去除。</p>
-<p>####添加版本</p>
-<p>进入 JSPatch 平台后台，在我的 APP 里选择这个 APP，点击添加版本。填入当前线上 APP 的版本号，可以在项目 TARGETS -&gt; General -&gt; version 上可以找到：</p>
+<h4 id="u6DFB_u52A0_u7248_u672C"><a href="#u6DFB_u52A0_u7248_u672C" class="headerlink" title="添加版本"></a>添加版本</h4><p>进入 JSPatch 平台后台，在我的 APP 里选择这个 APP，点击添加版本。填入当前线上 APP 的版本号，可以在项目 TARGETS -&gt; General -&gt; version 上可以找到：</p>
 <p><img src="http://ww3.sinaimg.cn/large/78cf69bdjw1f2v4at944pj20gq05o0t0.jpg" alt=""></p>
 <p>注意这里版本号必须一致，JSPatch 平台会只针对这个版本号下发对应的 JS 脚本，若版本号对应不上，客户端也就请求不到相应的 JS 脚本。</p>
-<p>####添加JS脚本</p>
-<p>点击进入刚添加的版本，上传 <strong>main.js</strong> 即可。</p>
+<h4 id="u6DFB_u52A0JS_u811A_u672C"><a href="#u6DFB_u52A0JS_u811A_u672C" class="headerlink" title="添加JS脚本"></a>添加JS脚本</h4><p>点击进入刚添加的版本，上传 <strong>main.js</strong> 即可。</p>
 <p>上传完成后，对应版本的 APP 会请求下载这个脚本保存在本地，以后每次启动都会执行这个脚本。至此线上 bug 修复完成。</p>
-<p>####修改/删除JS脚本</p>
-<p>若后续需要对这个脚本进行修改，可以重新上传新的脚本，APP 客户端会在请求时发现脚本已更新，下载最新脚本覆盖原来的，下次启动时执行。</p>
+<h4 id="u4FEE_u6539/_u5220_u9664JS_u811A_u672C"><a href="#u4FEE_u6539/_u5220_u9664JS_u811A_u672C" class="headerlink" title="修改/删除JS脚本"></a>修改/删除JS脚本</h4><p>若后续需要对这个脚本进行修改，可以重新上传新的脚本，APP 客户端会在请求时发现脚本已更新，下载最新脚本覆盖原来的，下次启动时执行。</p>
 <p>若想直接取消某个 APP 版本的 JS 脚本补丁，可以直接在 APP 版本界面删除此 APP 版本，APP 客户端会在请求时发现脚本已被删除，即刻删除本地 JS 脚本文件，下次启动时不再加载。</p>
 <p>最后来一发<a href="https://github.com/bang590/JSPatch/wiki/JSPatch-基础用法" target="_blank" rel="external">基础用法</a>!</p>
 <p>本文主要是整理一下,所以大多数文字都是摘自网络,如有侵权,请及时联系我!谢谢!</p>
@@ -129,7 +123,7 @@
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/OC-Swift/">OC, Swift</a>
+  <a class="article-category-link" href="/categories/OC/">OC</a>►<a class="article-category-link" href="/categories/OC/Swift/">Swift</a>
 </div>
 
 
@@ -176,7 +170,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
  
- 
+ <ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#u539F_u7406"><span class="toc-number">1.</span> <span class="toc-text">原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u4F7F_u7528_u8303_u4F8B"><span class="toc-number">2.</span> <span class="toc-text">使用范例</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u6D4B_u8BD5"><span class="toc-number">3.</span> <span class="toc-text">测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u6DFB_u52A0_u7248_u672C"><span class="toc-number">4.</span> <span class="toc-text">添加版本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u6DFB_u52A0JS_u811A_u672C"><span class="toc-number">5.</span> <span class="toc-text">添加JS脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#u4FEE_u6539/_u5220_u9664JS_u811A_u672C"><span class="toc-number">6.</span> <span class="toc-text">修改/删除JS脚本</span></a></li></ol>
  
   </div>
 
@@ -190,15 +184,17 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/OC/" title="OC">OC<sup>10</sup></a></li>
+			<li><a href="/categories/OC/" title="OC">OC<sup>11</sup></a></li>
 		  
 		
-		  
-			<li><a href="/categories/OC-Swift/" title="OC, Swift">OC, Swift<sup>1</sup></a></li>
 		  
 		
 		  
 			<li><a href="/categories/Others/" title="Others">Others<sup>3</sup></a></li>
+		  
+		
+		  
+			<li><a href="/categories/OC/Swift/" title="Swift">Swift<sup>1</sup></a></li>
 		  
 		
 		</ul>
